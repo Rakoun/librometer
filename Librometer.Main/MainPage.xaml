@@ -1,0 +1,80 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Librometer.Main.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModel="http://librometer.fr/ViewModels"
+    xmlns:views="clr-namespace:Librometer.Views;assembly=Librometer.Views"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    DataContext="{Binding [MainViewModel], Source={StaticResource ViewModelLocator}}"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="728" 
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False"
+    >
+    <!-- d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}" -->
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+ 
+        <!--Panorama control-->
+        <controls:Panorama Title="Librometer">
+            <controls:Panorama.Background>
+                <ImageBrush />
+            </controls:Panorama.Background>
+ 
+            <!--Panorama item one-->
+            <controls:PanoramaItem Header="Menu">
+                <ListBox>
+                    <ListBoxItem>
+                        <ListBoxItem.Template>
+                            <ControlTemplate>
+                                <Button Content="{Binding Settings}" Command="{Binding}"/>
+                            </ControlTemplate>
+                        </ListBoxItem.Template>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <ListBoxItem.Template>
+                            <ControlTemplate>
+                                <Button Content="{Binding Credits}" Command="{Binding}"/>
+                            </ControlTemplate>
+                        </ListBoxItem.Template>
+                    </ListBoxItem>
+                </ListBox>
+            </controls:PanoramaItem>
+ 
+            <!--Panorama item two-->
+            <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
+            <controls:PanoramaItem Header="Mes marques pages">
+                <views:ListOfBookmarks
+                    DataContext="{Binding [BookmarkListViewModel], Source={StaticResource ViewModelLocator}}"/>
+            </controls:PanoramaItem>
+            
+            <!-- Panorama item three-->
+            <controls:PanoramaItem Header="A la une">
+                <!-- TODO: ici l'image du livre du jour -->
+                <Image Source="{Binding}" />
+            </controls:PanoramaItem>
+        </controls:Panorama>
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="1.0" >
+<!-- 
+            <shell:ApplicationBarIconButton IconUri="/Images/save.png" Text="save" Click="Button1_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Images/delete.png" Text="delete" Click="Button2_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Images/help.png" Text="help" Click="Button3_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Images/settings.png" Text="settings" Click="Button4_Click" />
+
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="get default size value" Click="MenuItem1_Click" />
+                <shell:ApplicationBarMenuItem Text="get mini size value" Click="MenuItem2_Click" />
+            </shell:ApplicationBar.MenuItems>
+-->
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

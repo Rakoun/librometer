@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Librometer.Views.ListOfBookmarks"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:panel="clr-namespace:WP7DockPanel;assembly=WP7DockPanel"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}" d:DesignHeight="154" d:DesignWidth="423">
+
+    <!--<panel:DockPanel Margin="5">
+        <Grid panel:DockPanel.Dock="Top" Margin="0,0,0,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox />
+            <Button Content="Ok" Grid.Column="1" Margin="2"
+                Command="{Binding LaunchSearchCommand}"/>
+        </Grid>
+        <ListBox Width="Auto" VerticalAlignment="Stretch"
+                 ItemsSource="{Binding Items, Mode=OneWay}"
+                 ItemTemplate="{StaticResource BookmarkInListDataTemplate}"/>
+    </panel:DockPanel>-->
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="0,0,0,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding SearchText, Mode=TwoWay}" Grid.Column="0"/>
+            <Button Content="Ok" Grid.Column="1" Margin="0"
+                Command="{Binding LaunchSearchCommand}"/>
+        </Grid>
+        <ListBox x:Name="MyListBox" Grid.Row="1" Width="Auto" VerticalAlignment="Stretch"
+                 ItemsSource="{Binding Items, Mode=OneWay}"
+                 ItemTemplate="{StaticResource BookmarkInListDataTemplate}">
+        </ListBox>
+    </Grid>
+</UserControl>

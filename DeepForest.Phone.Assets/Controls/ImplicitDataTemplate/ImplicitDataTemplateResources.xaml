@@ -1,0 +1,11 @@
+﻿<ResourceDictionary x:Class="DeepForest.Phone.Assets.Controls.ImplicitDataTemplateResources"
+                    x:ClassModifier="internal"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:DeepForest.Phone.Assets.Controls">
+
+    <DataTemplate x:Key="ImplicitDataTemplate_240C1930-91F0-4F08-A59C-20D0F9AE34C1">
+        <local:ImplicitItemTemplate Content="{Binding}" />
+    </DataTemplate>
+    
+</ResourceDictionary>
