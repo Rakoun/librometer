@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DAC4BD0E-470C-4078-8BEF-D03E0FCB583B}</ProjectGuid>
+    <ProjectGuid>{64D0F98F-4C79-468A-8490-24AE1BDBDB3E}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Librometer.ViewModels</RootNamespace>
-    <AssemblyName>Librometer.ViewModels</AssemblyName>
+    <RootNamespace>Librometer.Adapters</RootNamespace>
+    <AssemblyName>Librometer.Adapters</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
@@ -41,6 +41,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Phone" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -49,25 +50,9 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookmarkListViewModel.cs" />
-    <Compile Include="BookmarkViewModel.cs" />
-    <Compile Include="BookViewModel.cs" />
-    <Compile Include="MainViewModel.cs" />
+    <Compile Include="INavigationServiceFacade.cs" />
+    <Compile Include="NavigationServiceFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Librometer.Adapters\Librometer.Adapters.csproj">
-      <Project>{64D0F98F-4C79-468A-8490-24AE1BDBDB3E}</Project>
-      <Name>Librometer.Adapters</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Librometer.Framework\Librometer.Framework.csproj">
-      <Project>{C2DCB5BD-49F1-433C-8C33-CDB97F852F2A}</Project>
-      <Name>Librometer.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Librometer.Model\Librometer.Model.csproj">
-      <Project>{E11FC434-492D-4472-B0D9-CA03C900060C}</Project>
-      <Name>Librometer.Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

@@ -58,12 +58,18 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
     <Reference Include="mscorlib.extensions" />
+    <Reference Include="WP7DockPanel">
+      <HintPath>..\Lib\WP7DockPanel.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseObserved.cs" />
@@ -71,6 +77,9 @@
     <Compile Include="IOC\ServiceLocator.cs" />
     <Compile Include="Messages\DialogService.cs" />
     <Compile Include="Messages\IDialogService.cs" />
+    <Compile Include="Messages\SaveOrCancelPage.xaml.cs">
+      <DependentUpon>SaveOrCancelPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelLocator\ViewModelLocator.cs" />
     <Compile Include="ViewModels\BaseListViewModel.cs" />
@@ -78,6 +87,26 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Messenger\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DeepForest.Phone.Assets\DeepForest.Phone.Assets.csproj">
+      <Project>{ABBE8A08-588A-44AB-A26E-0D90584EC290}</Project>
+      <Name>DeepForest.Phone.Assets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Librometer.Adapters\Librometer.Adapters.csproj">
+      <Project>{64D0F98F-4C79-468A-8490-24AE1BDBDB3E}</Project>
+      <Name>Librometer.Adapters</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Messages\DataTemplates\DataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Messages\SaveOrCancelPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

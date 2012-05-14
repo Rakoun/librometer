@@ -7,6 +7,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:assets="clr-namespace:DeepForest.Phone.Assets.Shell;assembly=DeepForest.Phone.Assets"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     DataContext="{Binding [MainViewModel], Source={StaticResource ViewModelLocator}}"
@@ -62,19 +63,13 @@
             </controls:PanoramaItem>
         </controls:Panorama>
     </Grid>
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="1.0" >
-<!-- 
-            <shell:ApplicationBarIconButton IconUri="/Images/save.png" Text="save" Click="Button1_Click" />
-            <shell:ApplicationBarIconButton IconUri="/Images/delete.png" Text="delete" Click="Button2_Click" />
-            <shell:ApplicationBarIconButton IconUri="/Images/help.png" Text="help" Click="Button3_Click" />
-            <shell:ApplicationBarIconButton IconUri="/Images/settings.png" Text="settings" Click="Button4_Click" />
+    <assets:PhoneApplicationPage.ApplicationBar>
+        <assets:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="1.0" >
+            <assets:ApplicationBarIconButton x:Name="AppBarIconBtnAdd" IconUri="/Images/save.png" Text="Nouveau" Command="{Binding OpenAddBookCommand}"/>
+            <assets:ApplicationBar.MenuItems>
+                <assets:ApplicationBarMenuItem x:Name="AppBarMnuItemAdd" Text="get default size value" Command="{Binding OpenAddBookCommand}"/>
+            </assets:ApplicationBar.MenuItems>
 
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="get default size value" Click="MenuItem1_Click" />
-                <shell:ApplicationBarMenuItem Text="get mini size value" Click="MenuItem2_Click" />
-            </shell:ApplicationBar.MenuItems>
--->
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+        </assets:ApplicationBar>
+    </assets:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

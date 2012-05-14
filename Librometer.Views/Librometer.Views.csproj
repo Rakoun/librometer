@@ -76,6 +76,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DeepForest.Phone.Assets\DeepForest.Phone.Assets.csproj">
+      <Project>{ABBE8A08-588A-44AB-A26E-0D90584EC290}</Project>
+      <Name>DeepForest.Phone.Assets</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Librometer.Framework\Librometer.Framework.csproj">
       <Project>{C2DCB5BD-49F1-433C-8C33-CDB97F852F2A}</Project>
       <Name>Librometer.Framework</Name>

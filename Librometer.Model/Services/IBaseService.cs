@@ -20,6 +20,8 @@ namespace Librometer.Model.Services
         TModelBase GetById(int id);
         List<TModelBase> GetByCriteria(TCriteria criteria);
         bool GetAsync(TCriteria criteria, Action<AsyncResponse, List<TModelBase>> callback);
+        void ApplyChanges();
+        void UndoChanges();
     }
 
     /// <summary>

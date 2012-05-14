@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 
 using Librometer.ViewModels;
+using Librometer.Framework;
 
 namespace Librometer.Main
 {

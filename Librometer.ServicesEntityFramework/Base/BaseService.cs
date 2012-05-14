@@ -269,7 +269,7 @@ namespace Librometer.ServicesSQLCE
         public void UndoChanges()
         {
             this._context.Dispose();
-            this._context = new LibroContext("chaine de connexion");//TODO: mettre la chaine de connexion dans une variable
+            this._context = new LibroContext(LibroContext.DBConnectionString);
         }
 
 

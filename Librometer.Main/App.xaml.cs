@@ -19,6 +19,7 @@ using Librometer.ServicesSQLCE;
 using Librometer.Framework;
 using IOCAlias = Librometer.Framework.IOC;
 using Librometer.ViewModels;
+using Librometer.Adapters;
 
 namespace Librometer.Main
 {
@@ -182,13 +183,17 @@ namespace Librometer.Main
             IOCAlias.ServiceLocator.Instance.Register<IBookService>(new BookService());
             IOCAlias.ServiceLocator.Instance.Register<ICategoryService>(new CategoryService());
             IOCAlias.ServiceLocator.Instance.Register<INoteService>(new NoteService());
+            IOCAlias.ServiceLocator.Instance.Register<IDialogService>(new DialogService());
+            IOCAlias.ServiceLocator.Instance.Register<INavigationServiceFacade>(
+                        new NavigationServiceFacade(((App)Application.Current).RootFrame));
         }
 
         private static void LoadViewModels()
         {
-            ViewModelLocator.RegisterViewModel<MainViewModel>(new MainViewModel());
+            ViewModelLocator.RegisterViewModel<MainViewModel>(
+                        new MainViewModel(IOCAlias.ServiceLocator.Instance.Retrieve<INavigationServiceFacade>()));
             ViewModelLocator.RegisterViewModel<BookmarkListViewModel>(new BookmarkListViewModel());
-            ViewModelLocator.RegisterViewModel<BookmarkViewModel>(new BaseViewModel());
+            ViewModelLocator.RegisterViewModel<BookmarkViewModel>(new BookmarkViewModel());
 
         }
 
