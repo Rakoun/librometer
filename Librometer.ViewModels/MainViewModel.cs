@@ -32,7 +32,7 @@ namespace Librometer.ViewModels
         {
             OpenAddBookCommand = new ProxyCommand<MainViewModel>((_) =>
                 {
-                    var viewModel = new BookViewModel(new BookModel(), false);
+                    var viewModel = new BookViewModel(new BookModel(), "Créer un livre", false);//TODO:mettre la chaîne "Créer un lvire" dans une ressource
                     viewModel.Book.BeginEdit();
                     _windowServices
                                 .OpenSaveOrCancelWindow<BookViewModel>(

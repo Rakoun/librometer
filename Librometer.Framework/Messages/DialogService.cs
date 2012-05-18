@@ -7,11 +7,14 @@ using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Tasks;
 
 using DeepForest.Phone.Assets.Tools;
 using Librometer.Adapters;
+using Rakouncom.WP.IsolatedStorage;
 
 
 
@@ -78,5 +81,32 @@ namespace Librometer.Framework
         {
             MessageBox.Show(message, title, MessageBoxButton.OK);
         }
+
+        public void LaunchCameraCaptureTask()
+        {
+            CameraCaptureTask cameraCaptureTask = new CameraCaptureTask();
+            cameraCaptureTask.Show();
+
+            cameraCaptureTask.Completed += (s, e) =>
+            {
+                if (e.ChosenPhoto == null)
+                    return;
+                // Sauvegarde de l'image dans l'isolated storage
+                WriteableBitmap writableBitmap = new WriteableBitmap(100, 80);
+                writableBitmap.LoadJpeg(e.ChosenPhoto);
+
+                string imageFolder = "Librometer/images/draft/";//TODO: à mettre dans une ressource
+                string imageFileName = "cover.jpg";//TODO: à mettre dans une ressource
+
+                using (var stream = IsolatedStorageHelper.CreateFile(imageFolder + imageFileName))
+                {
+                    writableBitmap
+                                .SaveJpeg(stream, writableBitmap.PixelWidth,
+                                        writableBitmap.PixelHeight, 0, 100);
+                }
+
+            };
+        }
+
     }
 }

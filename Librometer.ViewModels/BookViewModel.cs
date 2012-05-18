@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,26 +41,56 @@ namespace Librometer.ViewModels
         // Pour Blend
         public BookViewModel() { }
 
-        public BookViewModel(BookModel bookModel, bool synchronizedWithSelection)
+        private IDialogService _windowServices;
+        private IAuthorService _authorService;
+        private ICategoryService _categoryService;
+
+        public BookViewModel(BookModel bookModel, string pageTitle, bool synchronizedWithSelection)
         {
             this._book = bookModel;
+            this._pageTitle = pageTitle;
+            Item1Label = "Catégories";//TODO: mettre dans une ressource
+            Item2Label = "Auteurs";//TODO: mettre dans une ressource
 
+            if (_categoryService != null)
+                this._categories =
+                    new ObservableCollection<CategoryModel>(this._categoryService.GetByCriteria(CategoryCriteria.Empty));
+
+            if (_authorService != null)
+                this._authors =
+                    new ObservableCollection<AuthorModel>(this._authorService.GetByCriteria(AuthorCriteria.Empty));
         }
 
         protected override void ServicesInitialization()
         {
-            base.ServicesInitialization();
+            this._windowServices = ServiceLocator.Instance.Retrieve<IDialogService>();
+            this._authorService = ServiceLocator.Instance.Retrieve<IAuthorService>();
+            this._categoryService = ServiceLocator.Instance.Retrieve<ICategoryService>();
         }
 
         protected override void CommandsInitialization()
         {
-            base.CommandsInitialization();
+            DisplayCameraCommand = new ProxyCommand<BookViewModel>((_)=>
+                {
+                    _windowServices.LaunchCameraCaptureTask();
+                });
+
+            Item1Command = new ProxyCommand<BaseViewModel>((_)=>
+            {
+                MessageBox.Show("Item1Command");
+            });
+
+            Item2Command = new ProxyCommand<BaseViewModel>((_) =>
+            {
+                MessageBox.Show("Item2Command)");
+            });
         }
 
         #region Propriétés
 
-        private BookModel _book = null;
+        #region BookModel
 
+        private BookModel _book = null;
         public BookModel Book
         {
             get { return _book; }
@@ -74,11 +105,74 @@ namespace Librometer.ViewModels
             }
         }
 
-        public string TEST
+        #endregion //BookModel
+
+        #region Categories
+
+        private ObservableCollection<CategoryModel> _categories;
+        public ObservableCollection<CategoryModel> Categories
         {
-            get { return "bonjour"; }
+            get { return _categories; }
+            set
+            {
+                if (_categories == value) return;
+
+                _categories = value;
+                RaisePropertyChanged<ObservableCollection<CategoryModel>>(() => Categories);
+            }
         }
 
+        #endregion //Categories
+
+        #region Authors
+
+        private ObservableCollection<AuthorModel> _authors;
+        public ObservableCollection<AuthorModel> Authors
+        {
+            get { return _authors; }
+            set
+            {
+                if (_authors == value) return;
+
+                _authors = value;
+                RaisePropertyChanged<ObservableCollection<AuthorModel>>(() => Authors);
+            }
+        }
+
+        #endregion //Authors
+
+        #region PageTitle
+
+        private string _pageTitle;
+        public string PageTitle
+        {
+            get { return this._pageTitle; }
+            set { this._pageTitle = value; }
+        }
+
+        #endregion //PageTitle
+
+
+
+        #region Rates
+
+        private int[] _rates = new int[] { 1, 2, 3, 4, 5 };
+        public int [] Rates
+        {
+            get { return _rates; }
+            set
+            {
+                if (_rates == value) return;
+                _rates = value;
+                RaisePropertyChanged<int[]>(() => Rates);
+            }
+        }
+
+        #endregion  //State
+
         #endregion //Propriétés
+
+        public ProxyCommand<BookViewModel> DisplayCameraCommand { get; set; }
+
     }
 }

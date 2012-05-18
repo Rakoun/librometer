@@ -20,6 +20,7 @@ using Librometer.Framework;
 using IOCAlias = Librometer.Framework.IOC;
 using Librometer.ViewModels;
 using Librometer.Adapters;
+using Rakouncom.WP.IsolatedStorage;
 
 namespace Librometer.Main
 {
@@ -91,6 +92,7 @@ namespace Librometer.Main
         {
             LoadServices();
             LoadViewModels();
+            InitializeIsolatedStorage();
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -174,7 +176,7 @@ namespace Librometer.Main
 
         #endregion
 
-        #region Chargement des services et des ViewModel
+        #region Chargement des services, des ViewModel et initialisation de l'IsolatedStorage
 
         private static void LoadServices()
         {
@@ -197,6 +199,10 @@ namespace Librometer.Main
 
         }
 
+        private static void InitializeIsolatedStorage()
+        {
+            IsolatedStorageHelper.CreateDirectory(@"\Librometer\images\draft");
+        }
 
         #endregion
     }

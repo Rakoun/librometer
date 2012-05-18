@@ -135,7 +135,7 @@ namespace Rakouncom.WP.IsolatedStorage
         /// <remarks>
         /// Penser à fermer le flux dans la méthode appelante.
         /// </remarks>
-        /// <param name="fileName">Le chemin d'accès complet au fichier binaire</param>
+        /// <param name="fileName">Le chemin d'accès complet au fichier binaire.</param>
         /// <returns>Le fichier binaire.</returns>
         public static IsolatedStorageFileStream ReadBinaryFile(string fileName)
         {
@@ -154,6 +154,36 @@ namespace Rakouncom.WP.IsolatedStorage
             catch (Exception)
             {
                 //TODO:
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Créer un fichier binaire dans l'isolated storage.
+        /// </summary>
+        /// <param name="filePath">Le chemin d'accès complet au fichier.</param>
+        /// <returns>Le fichier binaire.</returns>
+        public static IsolatedStorageFileStream CreateFile(string filePath)
+        {
+            IsolatedStorageFileStream result = null;
+            try
+            {
+                using (IsolatedStorageFile myIsolatedStorage =
+                            IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (myIsolatedStorage.FileExists(filePath))
+                    {
+                        myIsolatedStorage.DeleteFile(filePath);
+                    }
+
+                    result = myIsolatedStorage.CreateFile(filePath);
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
             }
 
             return result;

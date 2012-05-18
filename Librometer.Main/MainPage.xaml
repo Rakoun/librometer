@@ -65,7 +65,7 @@
     </Grid>
     <assets:PhoneApplicationPage.ApplicationBar>
         <assets:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="1.0" >
-            <assets:ApplicationBarIconButton x:Name="AppBarIconBtnAdd" IconUri="/Images/save.png" Text="Nouveau" Command="{Binding OpenAddBookCommand}"/>
+            <assets:ApplicationBarIconButton x:Name="AppBarIconBtnAdd" IconUri="/Images/save.png" Text="Nouveau" Command="{Binding OpenAddBookCommand}" />
             <assets:ApplicationBar.MenuItems>
                 <assets:ApplicationBarMenuItem x:Name="AppBarMnuItemAdd" Text="get default size value" Command="{Binding OpenAddBookCommand}"/>
             </assets:ApplicationBar.MenuItems>

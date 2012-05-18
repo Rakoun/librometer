@@ -33,5 +33,25 @@ namespace Librometer.Framework
             if (handler != null)
                 handler.Invoke(this, EventArgs.Empty);
         }
+
+        public string ApplicationName
+        {
+            get {return "Librometer";}//TODO: à mettre en ressource
+        }
+
+        #region ApplicationBar (ce code casse un peu le pattern MVVM)
+
+        public string Item1Label { get; set; }
+        public string Item2Label { get; set; }
+
+        #region Command associé à deux item de l'applicationbar
+
+        public ProxyCommand<BaseViewModel> Item1Command { get; set; }
+        public ProxyCommand<BaseViewModel> Item2Command { get; set; }
+
+        #endregion//Command associé à deux item de l'applicationbar
+
+        #endregion//ApplicationBar
+
     }
 }

@@ -36,25 +36,25 @@ namespace Librometer.ServicesSQLCE
             if (!_context.DatabaseExists())
             {
                 _context.CreateDatabase();
-                /*
                 try
                 {
+                    
                     Author author = new Author()
                     {
-                        FirstName = "Patrick",
-                        LastName = "Smacchia",
-                        DisplayName = "Patrick Smacchia",
+                        FirstName = "Auteur",
+                        LastName = "Inconnu",
+                        DisplayName = "Auteur Inconnu",
                     };
                     _context.Authors.InsertOnSubmit(author);
                     _context.SubmitChanges();
-
+                    
                     Category category = new Category()
                     {
                         Name = "Informatique",
                     };
                     _context.Categories.InsertOnSubmit(category);
                     _context.SubmitChanges();
-
+                    /*
                     Book book = new Book()
                     {
                         IdAuthor = 1,
@@ -77,11 +77,12 @@ namespace Librometer.ServicesSQLCE
                     };
                     _context.Bookmarks.InsertOnSubmit(bookmark);
                     _context.SubmitChanges();
+                     */
                 }
                 catch (Exception ex)
                 {
                     _context.DeleteDatabase();
-                }*/
+                }
             }
         }
 

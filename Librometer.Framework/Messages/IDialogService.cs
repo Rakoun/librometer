@@ -15,5 +15,7 @@ namespace Librometer.Framework
 
         bool AskConfirmation(string title, string message);
         void DisplayInformation(string title, string message);
+
+        void LaunchCameraCaptureTask();
     }
 }

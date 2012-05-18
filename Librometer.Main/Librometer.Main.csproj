@@ -66,6 +66,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -135,6 +136,10 @@
     <ProjectReference Include="..\Librometer.Views\Librometer.Views.csproj">
       <Project>{824E06BD-17FD-454D-9B6E-01ACE1446972}</Project>
       <Name>Librometer.Views</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rakouncom.WP.IsolatedStorage\Rakouncom.WP.IsolatedStorage.csproj">
+      <Project>{ED772D18-3247-4EA2-A2CF-118B23E7FE74}</Project>
+      <Name>Rakouncom.WP.IsolatedStorage</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />

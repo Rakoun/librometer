@@ -6,6 +6,8 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:assets="clr-namespace:DeepForest.Phone.Assets.Controls;assembly=DeepForest.Phone.Assets"
+    xmlns:appbar="clr-namespace:DeepForest.Phone.Assets.Shell;assembly=DeepForest.Phone.Assets"
+    xmlns:framework="clr-namespace:Librometer.Framework"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,70 +15,24 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True" HorizontalAlignment="Center" VerticalAlignment="Center">
+    mc:Ignorable="d" shell:SystemTray.IsVisible="True" d:DesignHeight="696" d:DesignWidth="480">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
 
-    <!--<Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>-->
-
-        <!--TitlePanel contains the name of the application and page title-->
-        <!-- <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>-->
-
-        <!--ContentPanel - place additional content here-->
-        <!--<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
-    </Grid>-->
     <UserControl>
-        <!--<panel:DockPanel LastChildFill="True">
-            <Grid panel:DockPanel.Dock="Bottom">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button x:Name="_cancelButton" Click="_cancelButton_Click"
-            Grid.Column="1" Margin="5">
-                    <panel:DockPanel>
-                        <Image Width="12" Height="12" panel:DockPanel.Dock="Left"
-                Source="Images/Cancel.png" />
-                        <TextBlock Text="Annuler" />
-                    </panel:DockPanel>
-                </Button>
-                <Button x:Name="_saveButton" Click="_saveButton_Click"
-            Margin="5">
-                    <panel:DockPanel>
-                        <Image Width="12" Height="12" panel:DockPanel.Dock="Left"
-                Source="Images/OK.png" />
-                        <TextBlock Text="Sauvegarder" />
-                    </panel:DockPanel>
-                </Button>
-            </Grid>
-            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-                <ContentPresenter Content="{Binding .}" />
-            </ScrollViewer>
-        </panel:DockPanel>-->
-        
         <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-            <!--<ContentPresenter Content="{Binding .}" />-->
-            <!--<ContentControl VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Content="{Binding .}">
+            <ContentControl Content="{Binding}"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch">
                 <i:Interaction.Behaviors>
                     <assets:ImplicitContentTemplateBehavior/>
                 </i:Interaction.Behaviors>
-            </ContentControl>-->
-            <TextBlock x:Name="TxtBlock" Text="{Binding TEST}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontWeight="Bold" />
+            </ContentControl>
         </ScrollViewer>
     </UserControl>
     <!--Sample code showing usage of ApplicationBar-->
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" >
             <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnSave" Text="Enregistrer" Click="AppBarIconBtnSave_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" x:Name="AppBarIconBtnCancel" Text="Annuler" Click="AppBarIconBtnCancel_Click" />
             <shell:ApplicationBar.MenuItems>
@@ -84,6 +40,24 @@
                 <shell:ApplicationBarMenuItem Text="Annuler" x:Name="AppBarMnuItemCancel" Click="AppBarMnuItemCancel_Click"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+    <appbar:PhoneApplicationPage.ApplicationBar>
+        <appbar:ApplicationBar IsVisible="True" IsMenuEnabled="True" >
+            <appbar:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnSave" Text="Enregistrer" Click="AppBarIconBtnSave_Click"/>
+            <appbar:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" x:Name="AppBarIconBtnCancel" Text="Annuler" Click="AppBarIconBtnCancel_Click" />
+            <appbar:ApplicationBar.MenuItems>
+                <appbar:ApplicationBarMenuItem Text="Enregistrer" x:Name="AppBarMnuItemSave" Click="AppBarMnuItemSave_Click"/>
+                <appbar:ApplicationBarMenuItem Text="Annuler" x:Name="AppBarMnuItemCancel" Click="AppBarMnuItemCancel_Click"/>
+                <appbar:ApplicationBarMenuItem Text="{Binding Item1Label}" 
+                        x:Name="AppBarMnuItem1"
+                        Command="{Binding Item1Command}"
+                        Visibility="{Binding Item1Label, Converter={StaticResource StringToVisibilityConverter}}"/>
+                <appbar:ApplicationBarMenuItem Text="{Binding Item2Label}" 
+                        x:Name="AppBarMnuItem2"
+                        Command="{Binding Item2Command}"
+                                               Visibility="{Binding Item2Label, Converter={StaticResource StringToVisibilityConverter}}"/>
+            </appbar:ApplicationBar.MenuItems>
+        </appbar:ApplicationBar>
+    </appbar:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

@@ -52,6 +52,7 @@
     <Compile Include="BookmarkListViewModel.cs" />
     <Compile Include="BookmarkViewModel.cs" />
     <Compile Include="BookViewModel.cs" />
+    <Compile Include="CameraViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
