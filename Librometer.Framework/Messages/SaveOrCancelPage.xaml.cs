@@ -31,7 +31,7 @@ namespace Librometer.Framework
         public static readonly DependencyProperty CloseReasonProperty =
             DependencyProperty.Register("RaisonDeFermeture", typeof(MessageBoxResult), typeof(SaveOrCancelPage),
                 /*RGE new FrameworkPropertyMetadata(MessageBoxResult.OK)*/
-                new PropertyMetadata(MessageBoxResult.OK));
+                new PropertyMetadata(MessageBoxResult.None));
 
         /// <summary>
         /// Gets or sets the CloseReason property. This dependency property 

@@ -17,8 +17,10 @@ using Librometer.Adapters;
 
 namespace Librometer.ViewModels
 {
-    public class BookViewModel : BaseViewModel
+    public class CategoryViewModel : BaseViewModel
     {
+        private INavigationServiceFacade _navigationServiceFacade;
+
         public enum States
         {
             Perfect,
@@ -40,100 +42,53 @@ namespace Librometer.ViewModels
         #endregion  //State
 
         // Pour Blend
-        public BookViewModel() { }
+        public CategoryViewModel() { }
 
         private IDialogService _windowServices;
-        private IAuthorService _authorService;
         private ICategoryService _categoryService;
-        private INavigationServiceFacade _navigationServiceFacade;
 
-        public BookViewModel(
-                    BookModel bookModel, string pageTitle,
-                    INavigationServiceFacade navigationServiceFacade,
+        public CategoryViewModel(
+                    CategoryModel categoryModel, 
+                    string pageTitle, 
+                    INavigationServiceFacade navigationServiceFacade, 
                     bool synchronizedWithSelection)
         {
-            this._book = bookModel;
+            this._category = categoryModel;
             this._pageTitle = pageTitle;
             this._navigationServiceFacade = navigationServiceFacade;
-
-            if (_categoryService != null)
-                this._categories =
-                    new ObservableCollection<CategoryModel>(this._categoryService.GetByCriteria(CategoryCriteria.Empty));
-
-            if (_authorService != null)
-                this._authors =
-                    new ObservableCollection<AuthorModel>(this._authorService.GetByCriteria(AuthorCriteria.Empty));
         }
 
         protected override void ServicesInitialization()
         {
             this._windowServices = ServiceLocator.Instance.Retrieve<IDialogService>();
-            this._authorService = ServiceLocator.Instance.Retrieve<IAuthorService>();
             this._categoryService = ServiceLocator.Instance.Retrieve<ICategoryService>();
         }
 
         protected override void CommandsInitialization()
         {
-            DisplayCameraCommand = new ProxyCommand<BookViewModel>((_)=>
-                {
-                    _windowServices.LaunchCameraCaptureTask();
-                });
+            base.CommandsInitialization();
         }
 
         #region Propriétés
 
-        #region BookModel
+        #region CategoryModel
 
-        private BookModel _book = null;
-        public BookModel Book
+        private CategoryModel _category = null;
+        public CategoryModel Category
         {
-            get { return _book; }
+            get { return _category; }
             set
             {
-                if (_book != null)
+                if (_category != null)
                 {
 
-                    _book = value;
-                    RaisePropertyChanged<BookModel>(() => Book);
+                    _category = value;
+                    RaisePropertyChanged<CategoryModel>(() => Category);
                 }
             }
         }
 
-        #endregion //BookModel
-
-        #region Categories
-
-        private ObservableCollection<CategoryModel> _categories;
-        public ObservableCollection<CategoryModel> Categories
-        {
-            get { return _categories; }
-            set
-            {
-                if (_categories == value) return;
-
-                _categories = value;
-                RaisePropertyChanged<ObservableCollection<CategoryModel>>(() => Categories);
-            }
-        }
-
-        #endregion //Categories
-
-        #region Authors
-
-        private ObservableCollection<AuthorModel> _authors;
-        public ObservableCollection<AuthorModel> Authors
-        {
-            get { return _authors; }
-            set
-            {
-                if (_authors == value) return;
-
-                _authors = value;
-                RaisePropertyChanged<ObservableCollection<AuthorModel>>(() => Authors);
-            }
-        }
-
-        #endregion //Authors
+        #endregion //CategoryModel
 
         #region PageTitle
 
@@ -166,7 +121,6 @@ namespace Librometer.ViewModels
 
         #endregion //Propriétés
 
-        public ProxyCommand<BookViewModel> DisplayCameraCommand { get; set; }
 
     }
 }

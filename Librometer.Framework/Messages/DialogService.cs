@@ -22,7 +22,7 @@ namespace Librometer.Framework
 {
     public class DialogService : IDialogService
     {
-        public void OpenSaveOrCancelWindow<T>(string title, 
+        public void OpenSaveOrCancelWindow<T>( 
                     T dataContext, INavigationServiceFacade nav, Predicate<T> actionIfOK,
                     Predicate<T> actionIfKO)
         {
@@ -34,7 +34,8 @@ namespace Librometer.Framework
              */
             nav.Frame.Navigated += (s, o) => {
                 //On s'assure que le code n'est exécuté que si on ouvre la page
-                if (o.NavigationMode == System.Windows.Navigation.NavigationMode.New)
+                if (o.NavigationMode == System.Windows.Navigation.NavigationMode.New &&
+                    nav.Frame.Content is SaveOrCancelPage)
                 {
                     SaveOrCancelPage page = nav.Frame.Content as SaveOrCancelPage;
                     page.DataContext = dataContext;
@@ -69,6 +70,12 @@ namespace Librometer.Framework
             nav.Frame.Navigate(
                         new Uri("/Librometer.Framework;component/Messages/SaveOrCancelPage.xaml",
                         UriKind.Relative));
+        }
+
+        public void OpenNewPage(Uri uri, INavigationServiceFacade nav)
+        {
+            nav.Frame.Navigate(uri);
+            
         }
 
         public bool AskConfirmation(string title, string message)

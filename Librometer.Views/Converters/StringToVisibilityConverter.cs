@@ -19,7 +19,8 @@ namespace Librometer.Views.Converters
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value is string &&
-                !string.IsNullOrEmpty((string)value))
+                !string.IsNullOrEmpty((string)value) &&
+                value != "collapsed")
             {
                 return (string)value;
             }

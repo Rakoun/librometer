@@ -78,6 +78,9 @@
     <Compile Include="IOC\ServiceLocator.cs" />
     <Compile Include="Messages\DialogService.cs" />
     <Compile Include="Messages\IDialogService.cs" />
+    <Compile Include="Messages\NewPage.xaml.cs">
+      <DependentUpon>NewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Messages\SaveOrCancelPage.xaml.cs">
       <DependentUpon>SaveOrCancelPage.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Messages\DataTemplates\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Messages\NewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

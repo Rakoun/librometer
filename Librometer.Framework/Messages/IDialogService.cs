@@ -9,9 +9,11 @@ namespace Librometer.Framework
 {
     public interface IDialogService
     {
-        void OpenSaveOrCancelWindow<T>(string title,
+        void OpenSaveOrCancelWindow<T>(
                     T dataContext, INavigationServiceFacade nav, Predicate<T> actionIfOK,
                     Predicate<T> actionIfKO);
+
+        void OpenNewPage(Uri uri, INavigationServiceFacade nav);
 
         bool AskConfirmation(string title, string message);
         void DisplayInformation(string title, string message);

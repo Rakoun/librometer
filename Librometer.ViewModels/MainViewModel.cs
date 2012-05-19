@@ -32,11 +32,14 @@ namespace Librometer.ViewModels
         {
             OpenAddBookCommand = new ProxyCommand<MainViewModel>((_) =>
                 {
-                    var viewModel = new BookViewModel(new BookModel(), "Créer un livre", false);//TODO:mettre la chaîne "Créer un lvire" dans une ressource
+                    var viewModel = new BookViewModel(
+                                new BookModel(),
+                                "Créer un livre",
+                                this._navigationServiceFacade, false);//TODO:mettre la chaîne "Créer un lvire" dans une ressource
                     viewModel.Book.BeginEdit();
                     _windowServices
                                 .OpenSaveOrCancelWindow<BookViewModel>(
-                                "Ajout d'un livre", viewModel, this._navigationServiceFacade, (bookVM) =>
+                                        viewModel, this._navigationServiceFacade, (bookVM) =>
                                     {
                                         bookVM.Book.EndEdit();
                                         var srv = ServiceLocator.Instance.Retrieve<IBookService>();
@@ -45,6 +48,13 @@ namespace Librometer.ViewModels
                                         return ok;
                                         
                                     }, null);
+                });
+
+            DisplayParametersCommand = new ProxyCommand<MainViewModel>((_) =>
+                {
+                    _windowServices.OpenNewPage(
+                                new Uri("/Librometer.Views;component/SettingsPage.xaml", UriKind.Relative),
+                                this._navigationServiceFacade);
                 });
         }
 
