@@ -53,7 +53,10 @@ namespace Librometer.Views.Behaviors
                         utilisé que sur un TextBox.");
 
             /*RGE textBox.PreviewKeyDown += textBox_PreviewKeyDown;*/
-            textBox.KeyDown += new KeyEventHandler(textBox_KeyDown);
+            /*RGE textBox.KeyDown += new KeyEventHandler(textBox_KeyDown);*/
+            textBox.KeyDown += textBox_KeyDown;
+            //var receiver = new WeakReference(new ReceiverTextBoxKeyDown(textBox, GetCommand(textBox)));
+
         }
 
         static void textBox_KeyDown(object sender, KeyEventArgs e)

@@ -18,6 +18,7 @@
                         Source="/Librometer.Views;component/Resources/Converters.xaml" />
                 <ResourceDictionary
                         Source="/Librometer.Framework;component/Messages/DataTemplates/DataTemplates.xaml" />
+                <ResourceDictionary Source="/Librometer.Views;component/Resources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!-- ajout des ressources spécifiques au projet Main-->
             <fwk:ViewModelLocator x:Key="ViewModelLocator"/>

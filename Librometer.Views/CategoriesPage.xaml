@@ -50,9 +50,11 @@
     <appbar:PhoneApplicationPage.ApplicationBar>
         <appbar:ApplicationBar IsVisible="True" IsMenuEnabled="True" >
             <appbar:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnNew" Text="Nouveau" Command="{Binding OpenAddCategoryCommand}"/>
-            <appbar:ApplicationBar.MenuItems>
+            <appbar:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnDelete" Text="Supprimer" Command="{Binding DeleteCategoryCommand}"/>
+            <!--<appbar:ApplicationBar.MenuItems>
                 <appbar:ApplicationBarMenuItem Text="Nouveau" x:Name="AppBarMnuItemNew" Command="{Binding OpenAddCategoryCommand}"/>
-            </appbar:ApplicationBar.MenuItems>
+                <appbar:ApplicationBarMenuItem Text="Supprimer" x:Name="AppBarMnuItemDelete" Command="{Binding DeleteCategoryCommand}"/>
+            </appbar:ApplicationBar.MenuItems>-->
         </appbar:ApplicationBar>
     </appbar:PhoneApplicationPage.ApplicationBar>
 

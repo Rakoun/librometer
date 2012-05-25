@@ -80,7 +80,7 @@ namespace Librometer.Framework
 
         public bool AskConfirmation(string title, string message)
         {
-            return MessageBoxResult.Yes ==
+            return MessageBoxResult.OK ==
                 MessageBox.Show(message, title, MessageBoxButton.OKCancel);
         }
 

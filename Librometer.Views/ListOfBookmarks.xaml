@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:bhv="clr-namespace:Librometer.Views.Behaviors"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}" d:DesignHeight="154" d:DesignWidth="423">
@@ -33,7 +34,7 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding SearchText, Mode=TwoWay}" Grid.Column="0"/>
+            <TextBox Text="{Binding SearchText, Mode=TwoWay}"  Grid.Column="0" />
             <Button Content="Ok" Grid.Column="1" Margin="0"
                 Command="{Binding LaunchSearchCommand}"/>
         </Grid>

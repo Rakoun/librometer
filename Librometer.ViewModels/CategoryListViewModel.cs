@@ -59,6 +59,16 @@ namespace Librometer.ViewModels
 
                             }, null);
             });
+
+            DeleteCategoryCommand = new ProxyCommand<CategoryListViewModel>((_) =>
+                {
+                    if (_windowServices.AskConfirmation(
+                                "Suppresion des catégories",
+                                "Voulez-vous supprimer votre sélection") == true)
+                    {
+                        this.SearchText = this.SelectedItems.Count.ToString();
+                    }
+                });
         }
 
         protected override System.Collections.ObjectModel.ObservableCollection<CategoryViewModel> LoadItems()
@@ -148,6 +158,12 @@ namespace Librometer.ViewModels
         }
 
         #endregion //LaunchSearchCommand
+
+        #region DeleteCategoryCommand
+
+        public ProxyCommand<CategoryListViewModel> DeleteCategoryCommand { get; set; }
+
+        #endregion//DeleteCategoryCommand
 
         #endregion //Propriétés
 

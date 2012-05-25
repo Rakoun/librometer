@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:bhv="clr-namespace:Librometer.Views.Behaviors"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}" d:DesignHeight="154" d:DesignWidth="423">
@@ -38,8 +39,12 @@
                 Command="{Binding LaunchSearchCommand}"/>
         </Grid>
         <ListBox x:Name="MyListBox" Grid.Row="1" Width="Auto" VerticalAlignment="Stretch"
+                 bhv:ListBoxFix.SelectedItemsBinding="True"
+                 bhv:SelectedItemsHelper.SelectedItems="{Binding SelectedItems}"
+                 SelectionMode="Multiple" ItemContainerStyle="{StaticResource ListBoxCheckedStyle}"
                  ItemsSource="{Binding Items, Mode=OneWay}"
-                 ItemTemplate="{StaticResource CategoryInListDataTemplate}">
+                 ItemTemplate="{StaticResource CategoryInListDataTemplate}"
+                 >
         </ListBox>
     </Grid>
 </UserControl>

@@ -8,7 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
     <DataTemplate x:Key="BookmarkInListDataTemplate">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -25,13 +25,10 @@
 
     <DataTemplate x:Key="CategoryInListDataTemplate">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding Category.Name}" Grid.Column="1" Margin="2"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Category.Name}" Grid.Column="1" Margin="2"/>
+            </StackPanel>
         </Grid>
     </DataTemplate>
-    
+
 </ResourceDictionary>
