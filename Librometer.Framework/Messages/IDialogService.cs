@@ -14,6 +14,17 @@ namespace Librometer.Framework
                     Predicate<T> actionIfKO);
 
         void OpenNewPage(Uri uri, INavigationServiceFacade nav);
+        /// <summary>
+        /// Permet d'exécuter des métodes modifiant le contenu graphique
+        /// de la page courante.
+        /// </summary>
+        /// <remarks>
+        /// Ce code permet de ne pas briser le pattern MVVM en évitant de lier
+        /// le "ViewModel" et le "View".
+        /// </remarks>
+        /// <param name="nav"></param>
+        /// <param name="editMethodName"></param>
+        void EditCurrentPage<T>(INavigationServiceFacade nav, string editMethodName, T dataContext);
 
         bool AskConfirmation(string title, string message);
         void DisplayInformation(string title, string message);

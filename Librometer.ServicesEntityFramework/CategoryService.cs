@@ -14,7 +14,7 @@ namespace Librometer.ServicesSQLCE
         : BaseService<CategoryModel, Category, CategoryCriteria>
         , ICategoryService
     {
-        #region Méthodes spécifiques à IBookService
+        #region Méthodes spécifiques à ICategoryService
         //TODO: si nécessaire
         #endregion
 

@@ -66,8 +66,26 @@ namespace Librometer.ViewModels
                                 "Suppresion des catégories",
                                 "Voulez-vous supprimer votre sélection") == true)
                     {
-                        this.SearchText = this.SelectedItems.Count.ToString();
+                        //this.SearchText = this.SelectedItems.Count.ToString();
+                        foreach(CategoryViewModel category in this.SelectedItems)
+                        {
+                            _categoryService.Delete(category.Category);
+                        }
+                        _categoryService.ApplyChanges();
                     }
+                });
+
+            EditCategoryViewCommand = new ProxyCommand<CategoryListViewModel>((_) =>
+                {
+                });
+
+            ChoiceCategoryCommand = new ProxyCommand<CategoryListViewModel>((_) =>
+                {
+                    this.IsBtnChoiceVisible = false;
+                    _windowServices.EditCurrentPage<CategoryListViewModel>(
+                                this._navigationServiceFacade,
+                                "EditAppBar",
+                                this);
                 });
         }
 
@@ -78,7 +96,7 @@ namespace Librometer.ViewModels
             CategoryCriteria searchCriteria = CategoryCriteria.Empty;
             searchCriteria.Name = this.SearchText;
 
-            _categoryService.GetAsync(searchCriteria, (categoryResponse, bookmarks) =>
+            _categoryService.GetAsync(searchCriteria, (categoryResponse, categories) =>
                 {
                     if (categoryResponse.HasError)
                     {
@@ -88,14 +106,14 @@ namespace Librometer.ViewModels
                     }
                     ObservableCollection<CategoryViewModel> tempList
                         = new ObservableCollection<CategoryViewModel>();
-                    foreach (CategoryModel bookmarkModel in bookmarks)
+                    foreach (CategoryModel categoryModel in categories)
                     {
                         //TODO: mettre le titre dans une ressource
-                        CategoryViewModel bookmarkViewModel =
+                        CategoryViewModel categoryViewModel =
                             new CategoryViewModel(
-                                        bookmarkModel, "Categories",
+                                        categoryModel, "Categories",
                                         this._navigationServiceFacade, false);
-                        tempList.Add(bookmarkViewModel);
+                        tempList.Add(categoryViewModel);
                     }
 
                     Items = tempList;
@@ -130,17 +148,35 @@ namespace Librometer.ViewModels
 
         #endregion //SearchText
 
+        #region IsBtnChoiceVisible
+
+        private bool _isBtnChoiceVisible = true;
+
+        public bool IsBtnChoiceVisible
+        {
+            get { return _isBtnChoiceVisible; }
+            set
+            {
+                if (_isBtnChoiceVisible == value)
+                    return;
+                _isBtnChoiceVisible = value;
+                RaisePropertyChanged<bool>(() => IsBtnChoiceVisible);
+            }
+        }
+
+        #endregion // IsBtnChoiceVisible
+
         #region OpenAddCategoryCommand
 
         public ProxyCommand<CategoryListViewModel> OpenAddCategoryCommand { get; set; }
 
-        #endregion //OpenAddBookmarkViewCommand
+        #endregion //EditCategoryViewCommand
 
-        #region DisplayBookmarkSearchViewCommand
+        #region EditCategoryViewCommand
 
-        public ProxyCommand<CategoryListViewModel> DisplayBookmarkSearchViewCommand { get; set; }
+        public ProxyCommand<CategoryListViewModel> EditCategoryViewCommand { get; set; }
 
-        #endregion //DisplayBookmarkSearchViewCommand
+        #endregion //EditCategoryViewCommand
 
         #region LaunchSearchCommand
 
@@ -163,13 +199,24 @@ namespace Librometer.ViewModels
 
         public ProxyCommand<CategoryListViewModel> DeleteCategoryCommand { get; set; }
 
-        #endregion//DeleteCategoryCommand
+        #endregion //DeleteCategoryCommand
 
         #endregion //Propriétés
+
+        #region ChoiceCategoryCommand
+
+        public ProxyCommand<CategoryListViewModel> ChoiceCategoryCommand { get; set; }
+
+        #endregion //ChoiceCategoryCommand
 
         private void LaunchSearch()
         {
             this.Refresh();
+        }
+
+        private void EditCategory()
+        {
+
         }
     }
 }

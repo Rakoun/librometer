@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPhoneListBoxWithCheckBoxesControl", "WindowsPhoneListBoxWithCheckBoxesControl\WindowsPhoneListBoxWithCheckBoxesControl.csproj", "{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPhoneApplicationTest", "WindowsPhoneApplicationTest\WindowsPhoneApplicationTest.csproj", "{34ECA419-63B5-4770-924A-86126C12B3F0}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs23
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = WindowsPhoneApplicationTest\\WindowsPhoneApplicationTest.csproj
+		SccProjectName1 = WindowsPhoneApplicationTest
+		SccLocalPath1 = WindowsPhoneApplicationTest
+		SccProjectUniqueName2 = WindowsPhoneListBoxWithCheckBoxesControl\\WindowsPhoneListBoxWithCheckBoxesControl.csproj
+		SccProjectName2 = WindowsPhoneListBoxWithCheckBoxesControl
+		SccLocalPath2 = WindowsPhoneListBoxWithCheckBoxesControl
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34ECA419-63B5-4770-924A-86126C12B3F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34ECA419-63B5-4770-924A-86126C12B3F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34ECA419-63B5-4770-924A-86126C12B3F0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{34ECA419-63B5-4770-924A-86126C12B3F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34ECA419-63B5-4770-924A-86126C12B3F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34ECA419-63B5-4770-924A-86126C12B3F0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

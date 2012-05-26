@@ -1,0 +1,84 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System"
+    xmlns:controls="clr-namespace:System.Windows.Controls;assembly=WindowsPhoneListBoxWithCheckBoxesControl"
+    xmlns:windows="clr-namespace:System.Windows;assembly=System.Windows">
+
+    <Style TargetType="controls:ListBoxWithCheckBoxes">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="controls:ListBoxWithCheckBoxes">
+                        <Grid x:Name="gridListBoxRoot" controls:ClipToBound.ClipToBounds="True">
+                            <windows:VisualStateManager.VisualStateGroups>
+                                <windows:VisualStateGroup x:Name="CommonStates">
+                                    <windows:VisualState x:Name="NormalState" />
+                                    <windows:VisualState x:Name="ChooseState">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="translateTransformScrollViewerListBoxRoot" Storyboard.TargetProperty="X">
+                                                <DiscreteDoubleKeyFrame KeyTime="00:00:00" Value="34" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="scrollViewerListBoxRoot" Storyboard.TargetProperty="Width">
+                                                <DiscreteDoubleKeyFrame KeyTime="00:00:00" Value="{TemplateBinding MinWidth}" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </windows:VisualState>
+
+                                    <windows:VisualStateGroup.Transitions>
+                                        <windows:VisualTransition To="NormalState">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="translateTransformScrollViewerListBoxRoot" Storyboard.TargetProperty="X" From="68.0" To="0.0" Duration="00:00:00.2000000">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </windows:VisualTransition>
+                                        <windows:VisualTransition To="ChooseState">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="translateTransformScrollViewerListBoxRoot" Storyboard.TargetProperty="X" From="0.0" To="68.0" Duration="00:00:00.2000000">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </windows:VisualTransition>
+                                    </windows:VisualStateGroup.Transitions>
+                                </windows:VisualStateGroup>
+                            </windows:VisualStateManager.VisualStateGroups>
+
+                            <ScrollViewer x:Name="scrollViewerListBoxRoot" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0" TabNavigation="{TemplateBinding TabNavigation}" Margin="-68,0,0,0" MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MinWidthForChooseState}">
+                                <ItemsPresenter />
+                                <ScrollViewer.RenderTransform>
+                                    <TranslateTransform x:Name="translateTransformScrollViewerListBoxRoot" X="0" />
+                                </ScrollViewer.RenderTransform>
+                            </ScrollViewer>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Grid x:Name="gridListBoxItemRoot" Background="{TemplateBinding Background}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox x:Name="checkBoxListBoxItemChoose" Grid.Column="0" Width="68" Visibility="Visible" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected, Mode=TwoWay}" />
+                                        <ContentPresenter x:Name="contentPresenterListBoxItem" Grid.Column="1" HorizontalAlignment="Stretch" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>

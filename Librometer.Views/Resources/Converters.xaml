@@ -3,4 +3,5 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:conv="clr-namespace:Librometer.Views.Converters">
     <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+    <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 </ResourceDictionary>

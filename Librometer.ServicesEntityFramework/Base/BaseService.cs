@@ -278,7 +278,10 @@ namespace Librometer.ServicesSQLCE
 
         private TEntity GetEntityById(int id)
         {
-            var entity = this._context.GetTable<TEntity>().Where(t => t.Id == id).SingleOrDefault();
+            // le code suivant ne marche pas car il essaye d'accéder à Id de la classe de base qui n'est pas
+            // mappé
+            //var entity = this._context.GetTable<TEntity>().Where(t => t.Id == id).SingleOrDefault();
+            var entity = this._context.GetTable<TEntity>().Select(t => t).Where(t => t.Id == id).SingleOrDefault();
             return entity;
         }
         #endregion

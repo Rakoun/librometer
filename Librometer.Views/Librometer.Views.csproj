@@ -77,6 +77,7 @@
     <Compile Include="CategoriesPage.xaml.cs">
       <DependentUpon>CategoriesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="ListOfCategories.xaml.cs">
       <DependentUpon>ListOfCategories.xaml</DependentUpon>
@@ -102,6 +103,10 @@
     <ProjectReference Include="..\Librometer.ViewModels\Librometer.ViewModels.csproj">
       <Project>{DAC4BD0E-470C-4078-8BEF-D03E0FCB583B}</Project>
       <Name>Librometer.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WindowsPhoneListBoxWithCheckBoxesControl\WindowsPhoneListBoxWithCheckBoxesControl\WindowsPhoneListBoxWithCheckBoxesControl.csproj">
+      <Project>{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}</Project>
+      <Name>WindowsPhoneListBoxWithCheckBoxesControl</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

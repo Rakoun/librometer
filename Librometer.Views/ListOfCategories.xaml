@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:bhv="clr-namespace:Librometer.Views.Behaviors"
+    xmlns:checklstbox="clr-namespace:System.Windows.Controls;assembly=WindowsPhoneListBoxWithCheckBoxesControl"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}" d:DesignHeight="154" d:DesignWidth="423">
@@ -38,13 +39,21 @@
             <Button Content="Ok" Grid.Column="1" Margin="0"
                 Command="{Binding LaunchSearchCommand}"/>
         </Grid>
-        <ListBox x:Name="MyListBox" Grid.Row="1" Width="Auto" VerticalAlignment="Stretch"
+        <!--<ListBox x:Name="MyListBox" Grid.Row="1" Width="Auto" VerticalAlignment="Stretch"
                  bhv:ListBoxFix.SelectedItemsBinding="True"
                  bhv:SelectedItemsHelper.SelectedItems="{Binding SelectedItems}"
                  SelectionMode="Multiple" ItemContainerStyle="{StaticResource ListBoxCheckedStyle}"
                  ItemsSource="{Binding Items, Mode=OneWay}"
                  ItemTemplate="{StaticResource CategoryInListDataTemplate}"
                  >
-        </ListBox>
+        </ListBox>-->
+        <checklstbox:ListBoxWithCheckBoxes x:Name="MyListBox" Grid.Row="1" Width="Auto" VerticalAlignment="Stretch"
+                 bhv:ListBoxFix.SelectedItemsBinding="True"
+                 bhv:SelectedItemsHelper.SelectedItems="{Binding SelectedItems}"
+                 SelectionMode="Multiple"
+                 ItemsSource="{Binding Items, Mode=OneWay}"
+                 ItemTemplate="{StaticResource CategoryInListDataTemplate}"
+                 >
+        </checklstbox:ListBoxWithCheckBoxes>
     </Grid>
 </UserControl>

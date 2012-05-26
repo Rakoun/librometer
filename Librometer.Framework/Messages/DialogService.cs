@@ -13,10 +13,11 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 
 using DeepForest.Phone.Assets.Tools;
+using DeepForestAlias = DeepForest.Phone.Assets;
 using Librometer.Adapters;
 using Rakouncom.WP.IsolatedStorage;
-
-
+using DeepForest.Phone.Assets.Shell;
+using System.Windows.Data;
 
 namespace Librometer.Framework
 {
@@ -75,8 +76,22 @@ namespace Librometer.Framework
         public void OpenNewPage(Uri uri, INavigationServiceFacade nav)
         {
             nav.Frame.Navigate(uri);
-            
         }
+
+        public void EditCurrentPage<T>(INavigationServiceFacade nav, string editMethodName, T dataContext)
+        {
+            switch (editMethodName)
+            {
+                case "EditAppBar":
+                    {
+                        EditAppBar<T>(nav, dataContext);
+                    }
+                    break;
+                default:
+                    throw new Exception("Méthode inconnue dans EditCurrentPage");
+            }
+        }
+
 
         public bool AskConfirmation(string title, string message)
         {
@@ -114,6 +129,35 @@ namespace Librometer.Framework
 
             };
         }
+
+        #region Méthodes privées
+
+        private void EditAppBar<T>(INavigationServiceFacade nav, T dataContext)
+        {
+            /*
+            Microsoft.Phone.Controls.PhoneApplicationPage page =
+                nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage;
+            Microsoft.Phone.Shell.ApplicationBarIconButton btn = 
+                        page.ApplicationBar.Buttons[1] as Microsoft.Phone.Shell.ApplicationBarIconButton;
+             * */
+            
+            DeepForestAlias.Shell.ApplicationBar appBar =
+                DeepForestAlias.Shell.PhoneApplicationPage.GetApplicationBar(
+                        nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage);
+            //appBar.Buttons[1].Visibility = Visibility.Collapsed;
+            //appBar.Buttons[1].UpdateLayout();
+            //Visibility btn2 = appBar.Buttons[2].Visibility;
+            //btn = Visibility.Collapsed;
+            //(nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage).UpdateLayout();
+            (nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage).DataContext = dataContext;
+            BindingExpression bindExp = appBar.Buttons[1].GetBindingExpression(
+                        DeepForestAlias.Shell.ApplicationBarIconButton.VisibilityProperty);
+            Binding bind = bindExp.ParentBinding;
+            appBar.Buttons[1].SetBinding(DeepForestAlias.Shell.ApplicationBarIconButton.VisibilityProperty, bind);
+
+        }
+
+        #endregion // Méthodes privées
 
     }
 }
