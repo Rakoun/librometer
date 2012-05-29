@@ -108,6 +108,10 @@
       <Project>{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}</Project>
       <Name>WindowsPhoneListBoxWithCheckBoxesControl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WPExtensions\WPExtensions.csproj">
+      <Project>{564E0CE8-8BFE-45DA-B859-33504ACF7967}</Project>
+      <Name>WPExtensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="CategoriesPage.xaml">

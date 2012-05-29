@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Librometer.Adapters", "Libr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPhoneListBoxWithCheckBoxesControl", "WindowsPhoneListBoxWithCheckBoxesControl\WindowsPhoneListBoxWithCheckBoxesControl\WindowsPhoneListBoxWithCheckBoxesControl.csproj", "{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPExtensions", "WPExtensions\WPExtensions.csproj", "{564E0CE8-8BFE-45DA-B859-33504ACF7967}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,12 @@ Global
 		{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}.NET_4_0|Any CPU.Build.0 = Release|Any CPU
 		{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564E0CE8-8BFE-45DA-B859-33504ACF7967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564E0CE8-8BFE-45DA-B859-33504ACF7967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564E0CE8-8BFE-45DA-B859-33504ACF7967}.NET_4_0|Any CPU.ActiveCfg = Release|Any CPU
+		{564E0CE8-8BFE-45DA-B859-33504ACF7967}.NET_4_0|Any CPU.Build.0 = Release|Any CPU
+		{564E0CE8-8BFE-45DA-B859-33504ACF7967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564E0CE8-8BFE-45DA-B859-33504ACF7967}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,5 +134,6 @@ Global
 		{ABBE8A08-588A-44AB-A26E-0D90584EC290} = {2F7BEE12-3FC2-4724-8636-D88285407F55}
 		{64D0F98F-4C79-468A-8490-24AE1BDBDB3E} = {2F7BEE12-3FC2-4724-8636-D88285407F55}
 		{D6B82B52-2BF5-4D5A-9482-C2BA93B00193} = {2F7BEE12-3FC2-4724-8636-D88285407F55}
+		{564E0CE8-8BFE-45DA-B859-33504ACF7967} = {2F7BEE12-3FC2-4724-8636-D88285407F55}
 	EndGlobalSection
 EndGlobal

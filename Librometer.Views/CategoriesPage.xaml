@@ -23,23 +23,23 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>-->
 
-        <!--TitlePanel contains the name of the application and page title-->
+    <!--TitlePanel contains the name of the application and page title-->
     <!--<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>-->
 
-        <!--ContentPanel - place additional content here-->
-        <!--<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
+    <!--ContentPanel - place additional content here-->
+    <!--<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
     </Grid>-->
-        <ContentControl HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-            <views:ListOfCategories />
-        </ContentControl>
+    <ContentControl HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <views:ListOfCategories />
+    </ContentControl>
 
-            <!--Sample code showing usage of ApplicationBar-->
+    <!--Sample code showing usage of ApplicationBar-->
     <!--<phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1" IsEnabled="False"/>
             <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
@@ -47,16 +47,19 @@
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>-->
-    <appbar:PhoneApplicationPage.ApplicationBar>
+
+    <!--<appbar:PhoneApplicationPage.ApplicationBar>
         <appbar:ApplicationBar IsVisible="True" IsMenuEnabled="True" >
-            <appbar:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnNew" Text="Nouveau" Command="{Binding OpenAddCategoryCommand}"/>
+            <appbar:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnNew" Text="Nouveau" Command="{Binding OpenAddCategoryCommand}" />
             <appbar:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnChoice" Text="Choisir" Command="{Binding ChoiceCategoryCommand}" Visibility="{Binding IsBtnChoiceVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <appbar:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnDelete" Text="Supprimer" Command="{Binding DeleteCategoryCommand}" Visibility="{Binding titi, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            <!--<appbar:ApplicationBar.MenuItems>
-                <appbar:ApplicationBarMenuItem Text="Nouveau" x:Name="AppBarMnuItemNew" Command="{Binding OpenAddCategoryCommand}"/>
-                <appbar:ApplicationBarMenuItem Text="Supprimer" x:Name="AppBarMnuItemDelete" Command="{Binding DeleteCategoryCommand}"/>
-            </appbar:ApplicationBar.MenuItems>-->
+            <appbar:ApplicationBar.MenuItems>-->
+    <!--<appbar:ApplicationBarMenuItem Text="Nouveau" x:Name="AppBarMnuItemNew" Command="{Binding OpenAddCategoryCommand}" IsEnabled="False"/>
+                <appbar:ApplicationBarMenuItem Text="Supprimer" x:Name="AppBarMnuItemDelete" Command="{Binding DeleteCategoryCommand}"/>-->
+    <!--</appbar:ApplicationBar.MenuItems>
         </appbar:ApplicationBar>
-    </appbar:PhoneApplicationPage.ApplicationBar>
+    </appbar:PhoneApplicationPage.ApplicationBar>-->
+
+
 
 </phone:PhoneApplicationPage>

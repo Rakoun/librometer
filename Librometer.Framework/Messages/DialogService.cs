@@ -29,12 +29,13 @@ namespace Librometer.Framework
         {
             /*
              * Grosse astuce permettant d'afficher une PhoneApplicationPage 
-             * depuis le code C#. Grossièrement je navique vers la page SaveOrCancel
+             * depuis le code C#. Grossièrement je navigue vers la page SaveOrCancel
              * à partir de ma PhoneApplicationFrame, ensuite je l'édite à
              * l'exécution pour y mettre le DataContext désiré.
              */
-            nav.Frame.Navigated += (s, o) => {
-                //On s'assure que le code n'est exécuté que si on ouvre la page
+            System.Windows.Navigation.NavigatedEventHandler handler = null;
+            handler = delegate(object s, System.Windows.Navigation.NavigationEventArgs o)
+            {
                 if (o.NavigationMode == System.Windows.Navigation.NavigationMode.New &&
                     nav.Frame.Content is SaveOrCancelPage)
                 {
@@ -66,8 +67,14 @@ namespace Librometer.Framework
                             /*RGE arg.Cancel = !okToClose;*/
                         };
                 }
+                // il faut bien penser à ce désabonner de l'évènement afin de ne pas 
+                // avoir des effets de bord (par exemple des doublons lors des opérations
+                // de sauvegarde)
+                nav.Frame.Navigated -= handler;
 
             };
+            nav.Frame.Navigated += handler;
+            
             nav.Frame.Navigate(
                         new Uri("/Librometer.Framework;component/Messages/SaveOrCancelPage.xaml",
                         UriKind.Relative));
@@ -150,10 +157,11 @@ namespace Librometer.Framework
             //btn = Visibility.Collapsed;
             //(nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage).UpdateLayout();
             (nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage).DataContext = dataContext;
-            BindingExpression bindExp = appBar.Buttons[1].GetBindingExpression(
-                        DeepForestAlias.Shell.ApplicationBarIconButton.VisibilityProperty);
-            Binding bind = bindExp.ParentBinding;
-            appBar.Buttons[1].SetBinding(DeepForestAlias.Shell.ApplicationBarIconButton.VisibilityProperty, bind);
+            //BindingExpression bindExp = appBar.Buttons[1].GetBindingExpression(
+            //            DeepForestAlias.Shell.ApplicationBarIconButton.VisibilityProperty);
+            //Binding bind = bindExp.ParentBinding;
+            //appBar.Buttons[1].SetBinding(DeepForestAlias.Shell.ApplicationBarIconButton.VisibilityProperty, bind);
+            //appBar.Buttons[1].UpdateLayout();
 
         }
 

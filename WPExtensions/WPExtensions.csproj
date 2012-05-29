@@ -5,15 +5,15 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D6B82B52-2BF5-4D5A-9482-C2BA93B00193}</ProjectGuid>
+    <ProjectGuid>{564E0CE8-8BFE-45DA-B859-33504ACF7967}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsPhoneListBoxWithCheckBoxesControl</RootNamespace>
-    <AssemblyName>WindowsPhoneListBoxWithCheckBoxesControl</AssemblyName>
+    <RootNamespace>WPExtensions</RootNamespace>
+    <AssemblyName>WPExtensions</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
-    <TargetFrameworkProfile>WindowsPhone</TargetFrameworkProfile>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <SilverlightApplication>false</SilverlightApplication>
     <ValidateXaml>true</ValidateXaml>
@@ -50,25 +50,33 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Phone" />
-    <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
+    <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClipToBound.cs" />
-    <Compile Include="ListBoxWithCheckBoxes.cs" />
+    <Compile Include="Audio\IMicrophoneWrapper.cs" />
+    <Compile Include="Audio\MicrophoneWrapper.cs" />
+    <Compile Include="BaseAppBarItem.cs" />
+    <Compile Include="AdvancedApplicationBar.cs" />
+    <Compile Include="AdvancedApplicationBarIconButton.cs" />
+    <Compile Include="AdvancedApplicationBarMenuItem.cs" />
+    <Compile Include="Helpers\ApplicationBarSaveStateItem.cs" />
+    <Compile Include="Helpers\BaseButton.cs" />
+    <Compile Include="Helpers\StateHelper.cs" />
+    <Compile Include="IAppBarItem.cs" />
+    <Compile Include="ItemsControlNotifyPropertyChanged.cs" />
+    <Compile Include="PageExtension.cs" />
+    <Compile Include="TextBoxExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIHelper.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="themes\generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions />

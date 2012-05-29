@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="Librometer.Views.ListOfCategories"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:wpext="clr-namespace:WPExtensions;assembly=WPExtensions"
     xmlns:panel="clr-namespace:WP7DockPanel;assembly=WP7DockPanel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -48,12 +49,30 @@
                  >
         </ListBox>-->
         <checklstbox:ListBoxWithCheckBoxes x:Name="MyListBox" Grid.Row="1" Width="Auto" VerticalAlignment="Stretch"
-                 bhv:ListBoxFix.SelectedItemsBinding="True"
                  bhv:SelectedItemsHelper.SelectedItems="{Binding SelectedItems}"
                  SelectionMode="Multiple"
                  ItemsSource="{Binding Items, Mode=OneWay}"
                  ItemTemplate="{StaticResource CategoryInListDataTemplate}"
+                 IsInChooseState="{Binding IsLstBoxInChooseState}"
+                                                           
                  >
         </checklstbox:ListBoxWithCheckBoxes>
+
+        <wpext:AdvancedApplicationBar>
+            <wpext:AdvancedApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnNew" Text="Nouveau"
+                    Command="{Binding OpenAddCategoryCommand}"
+                    Visibility="{Binding IsBtnNewVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <wpext:AdvancedApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnChoice" Text="Choisir"
+                    Command="{Binding ChoiceCategoryCommand}"
+                    Visibility="{Binding IsBtnChoiceVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <wpext:AdvancedApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnDelete" Text="Supprimer"
+                    Command="{Binding DeleteCategoryCommand}"
+                    Visibility="{Binding IsBtnDeleteVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    IsEnabled="{Binding IsBtnDeleteEnabled}"/>
+            <!--<wpext:AdvancedApplicationBarMenuItem Text="Nouveau" x:Name="AppBarMnuItemNew" Command="{Binding OpenAddCategoryCommand}" />
+            <wpext:AdvancedApplicationBarMenuItem Text="Choisir" x:Name="AppBarMnuItemChoice" Command="{Binding ChoiceCategoryCommand}"/>
+            <wpext:AdvancedApplicationBarMenuItem Text="Supprimer" x:Name="AppBarMnuItemDelete" Command="{Binding DeleteCategoryCommand}"/>-->
+        </wpext:AdvancedApplicationBar>
+
     </Grid>
 </UserControl>

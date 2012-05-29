@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Data;
+using System.Collections;
 
 namespace Librometer.Views.Converters
 {
@@ -18,13 +19,16 @@ namespace Librometer.Views.Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is string &&
-                !string.IsNullOrEmpty((string)value) &&
-                value != "collapsed")
+            if (value == null) return false;
+            var list = (IList)value;
+            if (list.Count > 0)
             {
-                return (string)value;
+                return true;
             }
-            return (Visibility.Collapsed);
+            else
+            {
+                return false;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

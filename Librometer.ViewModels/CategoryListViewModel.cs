@@ -72,6 +72,12 @@ namespace Librometer.ViewModels
                             _categoryService.Delete(category.Category);
                         }
                         _categoryService.ApplyChanges();
+
+                        this.IsBtnNewVisible = true;
+                        this.IsBtnChoiceVisible = true;
+                        this.IsBtnDeleteVisible = false;
+                        //this.IsBtnDeleteEnabled = false;TODO: quand on saura intercepter la sélection d'un item
+                        this.IsLstBoxInChooseState = false;
                     }
                 });
 
@@ -81,11 +87,15 @@ namespace Librometer.ViewModels
 
             ChoiceCategoryCommand = new ProxyCommand<CategoryListViewModel>((_) =>
                 {
+                    this.IsBtnNewVisible = false;
                     this.IsBtnChoiceVisible = false;
+                    this.IsBtnDeleteVisible = true;
+                    this.IsLstBoxInChooseState = true;
+                    /*
                     _windowServices.EditCurrentPage<CategoryListViewModel>(
                                 this._navigationServiceFacade,
                                 "EditAppBar",
-                                this);
+                                this);*/
                 });
         }
 
@@ -148,6 +158,24 @@ namespace Librometer.ViewModels
 
         #endregion //SearchText
 
+        #region IsBtnNewVisible
+
+        private bool _isBtnNewVisible = true;
+
+        public bool IsBtnNewVisible
+        {
+            get { return _isBtnNewVisible; }
+            set
+            {
+                if (_isBtnNewVisible == value)
+                    return;
+                _isBtnNewVisible = value;
+                RaisePropertyChanged<bool>(() => IsBtnNewVisible);
+            }
+        }
+
+        #endregion // IsBtnNewVisible
+
         #region IsBtnChoiceVisible
 
         private bool _isBtnChoiceVisible = true;
@@ -165,6 +193,59 @@ namespace Librometer.ViewModels
         }
 
         #endregion // IsBtnChoiceVisible
+
+        #region IsBtnDeleteVisible
+
+        private bool _isBtnDeleteVisible = false;
+
+        public bool IsBtnDeleteVisible
+        {
+            get { return _isBtnDeleteVisible; }
+            set
+            {
+                if (_isBtnDeleteVisible == value)
+                    return;
+                _isBtnDeleteVisible = value;
+                RaisePropertyChanged<bool>(() => IsBtnDeleteVisible);
+            }
+        }
+
+        #endregion // IsBtnNewVisible
+
+        #region IsBtnDeleteEnabled
+
+        private bool _isBtnDeleteEnabled = true;
+
+        public bool IsBtnDeleteEnabled
+        {
+            get { return _isBtnDeleteEnabled; }
+            set
+            {
+                if (_isBtnDeleteEnabled == value)
+                    return;
+                _isBtnDeleteEnabled = value;
+                RaisePropertyChanged<bool>(() => IsBtnDeleteEnabled);
+            }
+        }
+
+        #endregion // IsBtnNewVisible
+
+        #region IsLstBoxInChooseState
+        
+        private bool _isLstBoxInChooseState = false;
+
+        public bool IsLstBoxInChooseState
+        {
+            get { return _isLstBoxInChooseState; }
+            set
+            {
+                if (_isLstBoxInChooseState == value) return;
+                _isLstBoxInChooseState = value;
+                RaisePropertyChanged<bool>(() => IsLstBoxInChooseState);
+            }
+        }
+
+        #endregion // IsLstBoxInChooseState
 
         #region OpenAddCategoryCommand
 
@@ -200,6 +281,8 @@ namespace Librometer.ViewModels
         public ProxyCommand<CategoryListViewModel> DeleteCategoryCommand { get; set; }
 
         #endregion //DeleteCategoryCommand
+
+       
 
         #endregion //Propriétés
 
