@@ -59,42 +59,44 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal">
-                    <Image x:Name="Cover" Source="{Binding}" Height="80" Width="100"/>
+                    <Image x:Name="Cover" Source="{Binding Book.Cover, Mode=TwoWay}" Height="80" Width="100"/>
                     <Button x:Name="BtnCamera" Content="..." Command="{Binding DisplayCameraCommand}"/>
                     <Button x:Name="BtnScan" Content="Scan" IsEnabled="False" />
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Grid.Row="1">
                     <TextBlock x:Name="TxtBlockTitle" Text="Titre" Style="{StaticResource PhoneTextSmallStyle}"/>
-                    <TextBox x:Name="TxtBoxTitle"/>
+                    <TextBox x:Name="TxtBoxTitle" Text="{Binding Book.Title, Mode=TwoWay}"/>
                 </StackPanel>
 
                 <toolkit:ListPicker x:Name="LstPickerCategory"
                                     ItemTemplate="{StaticResource CategoryPickerItemTemplage}"
                                     Header="Categorie"
                                     Grid.Row="2" Grid.ColumnSpan="3"
-                                    ItemsSource="{Binding Categories}" />
+                                    ItemsSource="{Binding Categories, Mode=TwoWay}"
+                                    SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"/>
 
                 <toolkit:ListPicker x:Name="LstPickerAuthor"
                                     Header="Auteur"
                                     ItemTemplate="{StaticResource AuthorPickerItemTemplage}"
                                     Grid.Row="3" Grid.ColumnSpan="3"
-                                    ItemsSource="{Binding Authors}"/>
+                                    ItemsSource="{Binding Authors, Mode=TwoWay}"
+                                    SelectedItem="{Binding SelectedAuthor, Mode=TwoWay}"/>
 
                 <StackPanel Orientation="Vertical" Grid.Row="4">
                     <TextBlock x:Name="TxtBlockEditor" Text="Editeur" Style="{StaticResource PhoneTextSmallStyle}"/>
-                    <TextBox x:Name="TxtBoxEditor" />
+                    <TextBox x:Name="TxtBoxEditor" Text="{Binding Book.Editor, Mode=TwoWay}"/>
                 </StackPanel>
 
                 <toolkit:ListPicker x:Name="LstPickerRate"
                                     Header="Note"
                                     ItemTemplate="{StaticResource RatePickerItemTemplage}"
                                     Grid.Row="5" Grid.ColumnSpan="3"
-                                    ItemsSource="{Binding Rates}"/>
+                                    ItemsSource="{Binding Rates, Mode=TwoWay}"/>
 
                 <StackPanel Orientation="Vertical" Grid.Row="6">
                     <TextBlock x:Name="TxtBlockISBN" Text="ISBN" Style="{StaticResource PhoneTextSmallStyle}"/>
-                    <TextBox x:Name="TxtBoxISBN" />
+                    <TextBox x:Name="TxtBoxISBN" Text="{Binding Book.ISBN, Mode=TwoWay}"/>
                 </StackPanel>
 
             </Grid>
@@ -124,9 +126,48 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Vertical" Grid.Row="1">
+                <StackPanel Orientation="Vertical" Grid.Row="0">
                     <TextBlock x:Name="TxtBlockName" Text="Nom" Style="{StaticResource PhoneTextSmallStyle}"/>
                     <TextBox x:Name="TxtBoxName" Text="{Binding Category.Name, Mode=TwoWay}"/>
+                </StackPanel>
+
+
+            </Grid>
+        </Grid>
+
+    </DataTemplate>
+
+    <DataTemplate x:Key="Librometer.ViewModels.AuthorViewModel">
+        <Grid x:Name="LayoutRoot" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--TitlePanel contains the name of the application and page title-->
+            <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+                <TextBlock x:Name="ApplicationTitle" Text="{Binding ApplicationName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock x:Name="PageTitle" Text="{Binding PageTitle}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            </StackPanel>
+
+            <!--ContentPanel - place additional content here-->
+            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Vertical" Grid.Row="0">
+                    <TextBlock x:Name="TxtBlockFirstName" Text="Nom" Style="{StaticResource PhoneTextSmallStyle}"/>
+                    <TextBox x:Name="TxtBoxFirstName" Text="{Binding Author.FirstName, Mode=TwoWay}"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Vertical" Grid.Row="1">
+                    <TextBlock x:Name="TxtBlockLastName" Text="Prénom" Style="{StaticResource PhoneTextSmallStyle}"/>
+                    <TextBox x:Name="TxtBoxLastName" Text="{Binding Author.LastName, Mode=TwoWay}"/>
                 </StackPanel>
 
 

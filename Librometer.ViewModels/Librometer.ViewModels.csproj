@@ -55,6 +55,8 @@
     <Compile Include="CameraViewModel.cs" />
     <Compile Include="CategoryListViewModel.cs" />
     <Compile Include="CategoryViewModel.cs" />
+    <Compile Include="AuthorListViewModel.cs" />
+    <Compile Include="AuthorViewModel.cs" />
     <Compile Include="SettingsViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +73,10 @@
     <ProjectReference Include="..\Librometer.Model\Librometer.Model.csproj">
       <Project>{E11FC434-492D-4472-B0D9-CA03C900060C}</Project>
       <Name>Librometer.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rakouncom.WP.IsolatedStorage\Rakouncom.WP.IsolatedStorage.csproj">
+      <Project>{ED772D18-3247-4EA2-A2CF-118B23E7FE74}</Project>
+      <Name>Rakouncom.WP.IsolatedStorage</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />

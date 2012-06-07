@@ -14,17 +14,17 @@ using Librometer.ServicesSQLCE.datas;
 
 namespace Librometer.ServicesSQLCE
 {
-    public partial class CategoryService
+    public partial class AuthorService
     {
-        protected override System.Collections.Generic.List<string> ValidationDeleting(Model.CategoryModel toDelete)
+        protected override System.Collections.Generic.List<string> ValidationDeleting(Model.AuthorModel toDelete)
         {
             var errors = new List<string>();
             IQueryable<Book> books =
                 books = from Book book in Context.Books
                              select book;
-            if (books.Where(b => b.IdCategory == toDelete.Id).Count() != 0)
+            if (books.Where(b => b.IdAuthor == toDelete.Id).Count() != 0)
             {
-                errors.Add("Une ou plusieurs catégories sont liées à un livre");//TODO: mettre dans une ressource
+                errors.Add("Un ou plusieurs auteurs sont liés à un livre");//TODO: mettre dans une ressource
                 return errors;
             }
 

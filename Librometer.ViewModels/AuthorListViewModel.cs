@@ -12,14 +12,14 @@ using System.Windows;
 
 namespace Librometer.ViewModels
 {
-    public class CategoryListViewModel : BaseListViewModel<CategoryViewModel>
+    public class AuthorListViewModel : BaseListViewModel<AuthorViewModel>
     {
         private IDialogService _windowServices;
-        private ICategoryService _categoryService;
+        private IAuthorService _authorService;
         private INavigationServiceFacade _navigationServiceFacade;
 
-        public CategoryListViewModel() { }
-        public CategoryListViewModel(INavigationServiceFacade navigationServiceFacade)
+        public AuthorListViewModel() { }
+        public AuthorListViewModel(INavigationServiceFacade navigationServiceFacade)
         {
             this._navigationServiceFacade = navigationServiceFacade;
         }
@@ -31,48 +31,54 @@ namespace Librometer.ViewModels
         {
             _windowServices
                 = ServiceLocator.Instance.Retrieve<IDialogService>();
-            _categoryService = ServiceLocator.Instance.Retrieve<ICategoryService>();
+            _authorService = ServiceLocator.Instance.Retrieve<IAuthorService>();
         }
 
         protected override void CommandsInitialization()
         {
-            LaunchSearchCommand = new ProxyCommand<CategoryListViewModel>(
+            LaunchSearchCommand = new ProxyCommand<AuthorListViewModel>(
                 (param) => LaunchSearch(),
                 /*_ => !string.IsNullOrEmpty(this.SearchText)*/null,
             this);
 
-            OpenAddCategoryCommand = new ProxyCommand<CategoryListViewModel>((_) =>
+            OpenAddAuthorCommand = new ProxyCommand<AuthorListViewModel>((_) =>
             {
-                var viewModel = new CategoryViewModel(
-                            new CategoryModel(),
-                            "Créer une catégorie",
-                            this._navigationServiceFacade, false);//TODO:mettre la chaîne "Créer une catégorie" dans une ressource
-                viewModel.Category.BeginEdit();
+                var viewModel = new AuthorViewModel(
+                            new AuthorModel(),
+                            "Créer un auteur",
+                            this._navigationServiceFacade, false);//TODO:mettre la chaîne "Créer un auteur" dans une ressource
+                viewModel.Author.BeginEdit();
                 _windowServices
-                            .OpenSaveOrCancelWindow<CategoryViewModel>(
-                                    viewModel, this._navigationServiceFacade, (categoryVM) =>
+                            .OpenSaveOrCancelWindow<AuthorViewModel>(
+                                    viewModel, this._navigationServiceFacade, (authorVM) =>
                             {
-                                categoryVM.Category.EndEdit();
-                                var srv = ServiceLocator.Instance.Retrieve<ICategoryService>();
-                                bool ok = srv.Create(categoryVM.Category);
+                                authorVM.Author.EndEdit();
+                                var srv = ServiceLocator.Instance.Retrieve<IAuthorService>();
+                                authorVM.Author.DisplayName = authorVM.Author.FirstName + " " +
+                                            authorVM.Author.LastName;
+                                bool ok = srv.Create(authorVM.Author);
                                 srv.ApplyChanges();
                                 return ok;
 
                             }, null);
             });
 
-            DeleteCategoryCommand = new ProxyCommand<CategoryListViewModel>((_) =>
+            DeleteAuthorCommand = new ProxyCommand<AuthorListViewModel>((_) =>
                 {
                     if (_windowServices.AskConfirmation(
-                                "Suppresion des catégories",
+                                "Suppresion des auteurs",
                                 "Voulez-vous supprimer votre sélection") == true)
                     {
                         //this.SearchText = this.SelectedItems.Count.ToString();
-                        foreach(CategoryViewModel category in this.SelectedItems)
+                        foreach(AuthorViewModel author in this.SelectedItems)
                         {
-                            _categoryService.Delete(category.Category);
+                            _authorService.Delete(author.Author);
+                            if (author.Author.ADesErreurs == true)
+                            {
+                                MessageBox.Show(author.Author.Error);
+                            }
                         }
-                        _categoryService.ApplyChanges();
+                        _authorService.ApplyChanges();
 
                         this.IsBtnNewVisible = true;
                         this.IsBtnChoiceVisible = true;
@@ -82,11 +88,11 @@ namespace Librometer.ViewModels
                     }
                 });
 
-            EditCategoryViewCommand = new ProxyCommand<CategoryListViewModel>((_) =>
+            EditAuthorViewCommand = new ProxyCommand<AuthorListViewModel>((_) =>
                 {
                 });
 
-            ChoiceCategoryCommand = new ProxyCommand<CategoryListViewModel>((_) =>
+            ChoiceAuthorCommand = new ProxyCommand<AuthorListViewModel>((_) =>
                 {
                     this.IsBtnNewVisible = false;
                     this.IsBtnChoiceVisible = false;
@@ -94,60 +100,62 @@ namespace Librometer.ViewModels
                     this.IsLstBoxInChooseState = true;
                 });
 
-            TapCommand = new ProxyCommand<CategoryListViewModel>((param) =>
+            TapCommand = new ProxyCommand<AuthorListViewModel>((param) =>
                 {
                     if (this.IsBtnDeleteVisible == false)
                     {
-                        CategoryViewModel selectedItem = param as CategoryViewModel;
+                        AuthorViewModel selectedItem = param as AuthorViewModel;
                         if (selectedItem != null)
                         {
-                            selectedItem.Category.BeginEdit();
+                            selectedItem.Author.BeginEdit();
                             _windowServices
                                         .OpenSaveOrCancelWindow(
                                                 selectedItem,
                                                 this._navigationServiceFacade,
                                 // Méthodes appelée si sauvegarde
-                                                (categoryVM) =>
+                                                (authorVM) =>
                                                 {
-                                                    categoryVM.Category.EndEdit();
-                                                    var srv = ServiceLocator.Instance.Retrieve<ICategoryService>();
-                                                    bool ok = srv.Update(categoryVM.Category);
+                                                    authorVM.Author.EndEdit();
+                                                    var srv = ServiceLocator.Instance.Retrieve<IAuthorService>();
+                                                    authorVM.Author.DisplayName = authorVM.Author.FirstName + " " +
+                                                                authorVM.Author.LastName;
+                                                    bool ok = srv.Update(authorVM.Author);
                                                     srv.ApplyChanges();
                                                     return ok;
                                                 },
                                 // Si annulation on annule les changements
                                                 (_) =>
                                                 {
-                                                    selectedItem.Category.CancelEdit(); return true;
+                                                    selectedItem.Author.CancelEdit(); return true;
                                                 });
                         }
                     }
                 });
         }
 
-        protected override System.Collections.ObjectModel.ObservableCollection<CategoryViewModel> LoadItems()
+        protected override System.Collections.ObjectModel.ObservableCollection<AuthorViewModel> LoadItems()
         {
             IsBeingProcessed = true;
             // Obtention des marques pages et création des ViewModel correspondant
-            CategoryCriteria searchCriteria = CategoryCriteria.Empty;
-            searchCriteria.Name = this.SearchText;
+            AuthorCriteria searchCriteria = AuthorCriteria.Empty;
+            searchCriteria.LastName = this.SearchText;
 
-            _categoryService.GetAsync(searchCriteria, (categoryResponse, categories) =>
+            _authorService.GetAsync(searchCriteria, (authorResponse, authors) =>
                 {
-                    if (categoryResponse.HasError)
+                    if (authorResponse.HasError)
                     {
                         // Traitement de l'erreur
                         IsBeingProcessed = false;
                         return;
                     }
-                    ObservableCollection<CategoryViewModel> tempList
-                        = new ObservableCollection<CategoryViewModel>();
-                    foreach (CategoryModel categoryModel in categories)
+                    ObservableCollection<AuthorViewModel> tempList
+                        = new ObservableCollection<AuthorViewModel>();
+                    foreach (AuthorModel authorModel in authors)
                     {
                         //TODO: mettre le titre dans une ressource
-                        CategoryViewModel categoryViewModel =
-                            new CategoryViewModel(
-                                        categoryModel, "Categories",
+                        AuthorViewModel categoryViewModel =
+                            new AuthorViewModel(
+                                        authorModel, "Auteurs",
                                         this._navigationServiceFacade, false);
                         tempList.Add(categoryViewModel);
                     }
@@ -156,7 +164,7 @@ namespace Librometer.ViewModels
                     IsBeingProcessed = false;
                 });
 
-            return new ObservableCollection<CategoryViewModel>();
+            return new ObservableCollection<AuthorViewModel>();
         }
 
         #endregion //Méthodes d'initialisation
@@ -273,63 +281,58 @@ namespace Librometer.ViewModels
 
         #endregion // IsLstBoxInChooseState
 
-        #region OpenAddCategoryCommand
+        #region OpenAddAuthorCommand
 
-        public ProxyCommand<CategoryListViewModel> OpenAddCategoryCommand { get; set; }
+        public ProxyCommand<AuthorListViewModel> OpenAddAuthorCommand { get; set; }
 
-        #endregion //EditCategoryViewCommand
+        #endregion //OpenAddAuthorCommand
 
-        #region EditCategoryViewCommand
+        #region EditAuthorViewCommand
 
-        public ProxyCommand<CategoryListViewModel> EditCategoryViewCommand { get; set; }
+        public ProxyCommand<AuthorListViewModel> EditAuthorViewCommand { get; set; }
 
-        #endregion //EditCategoryViewCommand
+        #endregion //EditAuthorViewCommand
 
         #region LaunchSearchCommand
 
-        private ProxyCommand<CategoryListViewModel> _launchSearchCommand = null;
+        private ProxyCommand<AuthorListViewModel> _launchSearchCommand = null;
 
-        public ProxyCommand<CategoryListViewModel> LaunchSearchCommand
+        public ProxyCommand<AuthorListViewModel> LaunchSearchCommand
         {
             get { return _launchSearchCommand; }
             set
             {
                 if (_launchSearchCommand == value) return;
                 _launchSearchCommand = value;
-                RaisePropertyChanged<ProxyCommand<CategoryListViewModel>>(() => LaunchSearchCommand);
+                RaisePropertyChanged<ProxyCommand<AuthorListViewModel>>(() => LaunchSearchCommand);
             }
         }
 
-        #endregion //LaunchSearchCommand
+        #endregion //DeleteAuthorCommand
 
         #region DeleteCategoryCommand
 
-        public ProxyCommand<CategoryListViewModel> DeleteCategoryCommand { get; set; }
+        public ProxyCommand<AuthorListViewModel> DeleteAuthorCommand { get; set; }
 
-        #endregion //DeleteCategoryCommand
+        #endregion //DeleteAuthorCommand
 
         #endregion //Propriétés
 
-        #region ChoiceCategoryCommand
+        #region ChoiceAuthorCommand
 
-        public ProxyCommand<CategoryListViewModel> ChoiceCategoryCommand { get; set; }
+        public ProxyCommand<AuthorListViewModel> ChoiceAuthorCommand { get; set; }
 
-        #endregion //ChoiceCategoryCommand
+        #endregion //ChoiceAuthorCommand
 
         #region TapCommand
 
-        public ProxyCommand<CategoryListViewModel> TapCommand { get; set; }
+        public ProxyCommand<AuthorListViewModel> TapCommand { get; set; }
 
         #endregion // TapCommand
 
         private void LaunchSearch()
         {
             this.Refresh();
-        }
-
-        private void EditCategory()
-        {
-
         }
     }
 }

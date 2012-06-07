@@ -188,5 +188,74 @@ namespace Rakouncom.WP.IsolatedStorage
 
             return result;
         }
+
+        /// <summary>
+        /// Copie un fichier existant dans un autre.
+        /// </summary>
+        /// <param name="sourceFileName">Chemin d'accès du fichier source.</param>
+        /// <param name="destinationFileName">Chemin d'accès du fichier destination.</param>
+        public static void CopyFile(string sourceFileName, string destinationFileName)
+        {
+            try
+            {
+                using (IsolatedStorageFile myIsolatedStorage =
+                            IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    myIsolatedStorage.CopyFile(sourceFileName, destinationFileName, true);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Vérifie si le chemin d'accès passé en paramètre correspond
+        /// à un fichier existant.
+        /// </summary>
+        /// <param name="filePath">Chemin d'accès du fichier.</param>
+        /// <returns>True si le fichier existe, false sinon</returns>
+        public static bool FileExist(string filePath)
+        {
+            try
+            {
+                using (IsolatedStorageFile myIsolatedStorage =
+                            IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    return myIsolatedStorage.FileExists(filePath);
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Supprime un fichier de l'isolated storage.
+        /// </summary>
+        /// <param name="directoryName">Le chemin complet du fichier à supprimer.</param>
+        public static void DeleteFile(string filePath)
+        {
+            try
+            {
+                using (IsolatedStorageFile myIsolatedStorage =
+                            IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (!string.IsNullOrEmpty(filePath) &&
+                        !myIsolatedStorage.FileExists(filePath))
+                    {
+                        myIsolatedStorage.DeleteFile(filePath);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO:
+            }
+        }
     }
 }

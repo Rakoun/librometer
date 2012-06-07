@@ -8,6 +8,7 @@ using Librometer.Framework.IOC;
 using Librometer.Model;
 using Librometer.Model.Services;
 using Librometer.Adapters;
+using Rakouncom.WP.IsolatedStorage;
 
 namespace Librometer.ViewModels
 {
@@ -42,9 +43,45 @@ namespace Librometer.ViewModels
                                         viewModel, this._navigationServiceFacade, (bookVM) =>
                                     {
                                         bookVM.Book.EndEdit();
-                                        var srv = ServiceLocator.Instance.Retrieve<IBookService>();
-                                        bool ok = srv.Create(bookVM.Book);
-                                        srv.ApplyChanges();
+
+                                        var srvBook = ServiceLocator.Instance.Retrieve<IBookService>();
+
+                                        // on évalue l'identifiant du prochain livre
+                                        string nextBookId = (srvBook.GetLastCreatedId() + 1).ToString().PadLeft(4,'0');
+
+                                        // création du chemin d'accès au fichier image qui contiendra
+                                        // la photo de la couverture du livre
+                                        string coverPath = "Librometer/images/cover" + nextBookId + ".jpg";
+
+                                        // on sauvegarde le nouveau livre
+                                        bookVM.Book.IdCategory = bookVM.SelectedCategory.Id;
+                                        bookVM.Book.IdAuthor = bookVM.SelectedAuthor.Id;
+                                        bookVM.Book.Cover = coverPath;
+                                        bool ok = srvBook.Create(bookVM.Book);
+
+                                        // on crée le nouveau Bookmark
+                                        var srvBookmark = ServiceLocator.Instance.Retrieve<IBookmarkService>();
+                                        BookmarkModel bookmark = new BookmarkModel()
+                                        {
+                                            CreationDate= DateTime.Now.ToShortDateString(),
+                                            IdBook = 0,
+                                            ThumbImage = coverPath,
+                                            Name=bookVM.Book.Title,
+                                            ReaderPage=0
+                                        };
+                                        srvBookmark.Create(bookmark);
+
+                                        srvBook.ApplyChanges();
+                                        srvBookmark.ApplyChanges();
+
+                                        if (IsolatedStorageHelper.FileExist("Librometer/images/draft/cover.jpg") == true)
+                                        {
+                                            IsolatedStorageHelper.CopyFile("Librometer/images/draft/cover.jpg", coverPath);
+                                            // on supprime l'image contenu dans le répertoire draft
+                                            IsolatedStorageHelper.DeleteFile("Librometer/images/draft/cover.jpg");
+                                        }
+
+
                                         return ok;
                                         
                                     }, null);

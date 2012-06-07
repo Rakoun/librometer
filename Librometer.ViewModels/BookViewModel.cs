@@ -14,6 +14,7 @@ using Librometer.Model;
 using Librometer.Framework.IOC;
 using Librometer.Model.Services;
 using Librometer.Adapters;
+using System.Collections;
 
 namespace Librometer.ViewModels
 {
@@ -63,6 +64,22 @@ namespace Librometer.ViewModels
             if (_authorService != null)
                 this._authors =
                     new ObservableCollection<AuthorModel>(this._authorService.GetByCriteria(AuthorCriteria.Empty));
+
+            #region Initialisation supplémentaire pour problème dans le ListPicker
+
+            IEnumerator enumcat = this._categories.GetEnumerator();
+            enumcat.MoveNext();
+            _selectedCategory = enumcat.Current as CategoryModel;
+
+            IEnumerator enumaut = this._authors.GetEnumerator();
+            enumaut.MoveNext();
+            _selectedAuthor = enumaut.Current as AuthorModel;
+
+            #endregion // Initialisation supplémentaire pour problème dans le ListPicker
+
+
+
+
         }
 
         protected override void ServicesInitialization()
@@ -163,6 +180,52 @@ namespace Librometer.ViewModels
         }
 
         #endregion  //State
+
+        #region SelectedCategory
+
+        private CategoryModel _selectedCategory;
+        public CategoryModel SelectedCategory
+        {
+            get { return _selectedCategory; }
+            set
+            {
+                if (_selectedCategory == value) return;
+                if (_selectedCategory == null)
+                {
+                    IEnumerator enumcat = this._categories.GetEnumerator();
+                    enumcat.MoveNext();
+                    _selectedCategory = enumcat.Current as CategoryModel;
+                }
+
+                _selectedCategory = value;
+                RaisePropertyChanged<CategoryModel>(() => SelectedCategory);
+            }
+        }
+
+        #endregion // SelectedCategory
+
+        #region SelectedAuthor
+
+        private AuthorModel _selectedAuthor;
+        public AuthorModel SelectedAuthor
+        {
+            get { return _selectedAuthor; }
+            set
+            {
+                if (_selectedAuthor == value) return;
+                if (_selectedAuthor == null)
+                {
+                    IEnumerator enumaut = this._authors.GetEnumerator();
+                    enumaut.MoveNext();
+                    _selectedAuthor = enumaut.Current as AuthorModel;
+                }
+
+                _selectedAuthor = value;
+                RaisePropertyChanged<AuthorModel>(() => SelectedAuthor);
+            }
+        }
+
+        #endregion // SelectedCategory
 
         #endregion //Propriétés
 

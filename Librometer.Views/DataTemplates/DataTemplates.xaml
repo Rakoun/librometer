@@ -31,4 +31,13 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="AuthorInListDataTemplate">
+        <Grid>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Author.LastName}" Grid.Column="1" Margin="2"/>
+                <TextBlock Text="{Binding Author.FirstName}" Grid.Column="1" Margin="2"/>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
 </ResourceDictionary>

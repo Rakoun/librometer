@@ -46,7 +46,7 @@ namespace Librometer.ViewModels
             OpenAuthorsSettingCommand = new ProxyCommand<SettingsViewModel>((_) =>
             {
                 this._windowServices.OpenNewPage(
-                            new Uri("/Librometer.Views;component/AuhtorsPage.xaml", UriKind.Relative),
+                            new Uri("/Librometer.Views;component/AuthorsPage.xaml", UriKind.Relative),
                             this._navigationServiceFacade);
             });
         }

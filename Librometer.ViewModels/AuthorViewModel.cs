@@ -17,7 +17,7 @@ using Librometer.Adapters;
 
 namespace Librometer.ViewModels
 {
-    public class CategoryViewModel : BaseViewModel
+    public class AuthorViewModel : BaseViewModel
     {
         private INavigationServiceFacade _navigationServiceFacade;
 
@@ -42,18 +42,18 @@ namespace Librometer.ViewModels
         #endregion  //State
 
         // Pour Blend
-        public CategoryViewModel() { }
+        public AuthorViewModel() { }
 
         private IDialogService _windowServices;
-        private ICategoryService _categoryService;
+        private IAuthorService _authorService;
 
-        public CategoryViewModel(
-                    CategoryModel categoryModel, 
+        public AuthorViewModel(
+                    AuthorModel authorModel, 
                     string pageTitle, 
                     INavigationServiceFacade navigationServiceFacade, 
                     bool synchronizedWithSelection)
         {
-            this._category = categoryModel;
+            this._author = authorModel;
             this._pageTitle = pageTitle;
             this._navigationServiceFacade = navigationServiceFacade;
         }
@@ -61,7 +61,7 @@ namespace Librometer.ViewModels
         protected override void ServicesInitialization()
         {
             this._windowServices = ServiceLocator.Instance.Retrieve<IDialogService>();
-            this._categoryService = ServiceLocator.Instance.Retrieve<ICategoryService>();
+            this._authorService = ServiceLocator.Instance.Retrieve<IAuthorService>();
         }
 
         protected override void CommandsInitialization()
@@ -71,24 +71,24 @@ namespace Librometer.ViewModels
 
         #region Propriétés
 
-        #region CategoryModel
+        #region AuthorModel
 
-        private CategoryModel _category = null;
-        public CategoryModel Category
+        private AuthorModel _author = null;
+        public AuthorModel Author
         {
-            get { return _category; }
+            get { return _author; }
             set
             {
-                if (_category != null)
+                if (_author != null)
                 {
 
-                    _category = value;
-                    RaisePropertyChanged<CategoryModel>(() => Category);
+                    _author = value;
+                    RaisePropertyChanged<AuthorModel>(() => Author);
                 }
             }
         }
 
-        #endregion //CategoryModel
+        #endregion //AuthorModel
 
         #region PageTitle
 

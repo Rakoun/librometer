@@ -71,6 +71,7 @@
     <Compile Include="BookService.cs" />
     <Compile Include="CategoryService.cs" />
     <Compile Include="CategoryService.Validation.cs" />
+    <Compile Include="AuthorService.Validation.cs" />
     <Compile Include="datas\Author.cs" />
     <Compile Include="datas\Book.cs" />
     <Compile Include="datas\Bookmark.cs" />

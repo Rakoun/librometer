@@ -63,6 +63,7 @@
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
     <Reference Include="mscorlib.extensions" />
@@ -79,6 +80,12 @@
     </Compile>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="AuthorsPage.xaml.cs">
+      <DependentUpon>AuthorsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListOfAuthors.xaml.cs">
+      <DependentUpon>ListOfAuthors.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListOfCategories.xaml.cs">
       <DependentUpon>ListOfCategories.xaml</DependentUpon>
     </Compile>
@@ -117,6 +124,14 @@
     <Page Include="CategoriesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AuthorsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ListOfAuthors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ListOfCategories.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -137,7 +137,5 @@ namespace Librometer.Model
                 RaisePropertyChanged<string>(() => ISBN);
             }
         }
-
-
     }
 }

@@ -19,6 +19,7 @@ namespace Librometer.Model.Services
         bool Delete(TModelBase toDelete);
         TModelBase GetById(int id);
         List<TModelBase> GetByCriteria(TCriteria criteria);
+        int GetLastCreatedId();
         bool GetAsync(TCriteria criteria, Action<AsyncResponse, List<TModelBase>> callback);
         void ApplyChanges();
         void UndoChanges();

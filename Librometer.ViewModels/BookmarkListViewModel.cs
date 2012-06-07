@@ -69,7 +69,7 @@ namespace Librometer.ViewModels
 
         #region SearchText
 
-        private string _searchText = ".net"/*string.Empty*/;
+        private string _searchText = string.Empty;
 
         /// <summary>
         /// L'intitulé du marque page recherché.

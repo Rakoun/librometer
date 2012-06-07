@@ -181,6 +181,17 @@ namespace Librometer.ServicesSQLCE
             return list.ToList();
         }
 
+        /// <summary>
+        /// Récupère l'identifiant du dernier TEntity créé.
+        /// </summary>
+        /// <returns>L'identifiant du dernier TEntity créé.</returns>
+        public virtual int GetLastCreatedId()
+        {
+            var result = (from o in this._context.GetTable<TEntity>()
+                          orderby o.Id descending select o.Id).FirstOrDefault();
+            return result;
+        }
+
         protected SynchronizationContext SynchronisationContext
         {
             get { return SynchronizationContext.Current; }

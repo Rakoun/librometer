@@ -45,10 +45,10 @@
         <appbar:ApplicationBar IsVisible="True" IsMenuEnabled="True" >
             <appbar:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnSave" Text="Enregistrer" Click="AppBarIconBtnSave_Click"/>
             <appbar:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" x:Name="AppBarIconBtnCancel" Text="Annuler" Click="AppBarIconBtnCancel_Click" />
-            <appbar:ApplicationBar.MenuItems>
+            <!--<appbar:ApplicationBar.MenuItems>
                 <appbar:ApplicationBarMenuItem Text="Enregistrer" x:Name="AppBarMnuItemSave" Click="AppBarMnuItemSave_Click"/>
                 <appbar:ApplicationBarMenuItem Text="Annuler" x:Name="AppBarMnuItemCancel" Click="AppBarMnuItemCancel_Click"/>
-            </appbar:ApplicationBar.MenuItems>
+            </appbar:ApplicationBar.MenuItems>-->
         </appbar:ApplicationBar>
     </appbar:PhoneApplicationPage.ApplicationBar>
 

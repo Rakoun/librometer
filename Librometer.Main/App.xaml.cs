@@ -198,6 +198,8 @@ namespace Librometer.Main
             ViewModelLocator.RegisterViewModel<BookmarkViewModel>(new BookmarkViewModel());
             ViewModelLocator.RegisterViewModel<CategoryListViewModel>(
                         new CategoryListViewModel(IOCAlias.ServiceLocator.Instance.Retrieve<INavigationServiceFacade>()));
+            ViewModelLocator.RegisterViewModel<AuthorListViewModel>(
+                        new AuthorListViewModel(IOCAlias.ServiceLocator.Instance.Retrieve<INavigationServiceFacade>()));
             ViewModelLocator.RegisterViewModel<SettingsViewModel>(
                         new SettingsViewModel(IOCAlias.ServiceLocator.Instance.Retrieve<INavigationServiceFacade>()));
 
