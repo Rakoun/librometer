@@ -40,4 +40,13 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="BookInListDataTemplate">
+        <Grid>
+            <StackPanel Orientation="Horizontal">
+                <Image Grid.Column="0" Source="{Binding Book.ImageSource}" Margin="2"/>
+                <TextBlock Text="{Binding Book.Title}" Grid.Column="1" Margin="2"/>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
 </ResourceDictionary>

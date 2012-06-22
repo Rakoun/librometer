@@ -24,11 +24,11 @@ namespace Librometer.Framework
         /// </remarks>
         /// <param name="nav"></param>
         /// <param name="editMethodName"></param>
-        void EditCurrentPage<T>(INavigationServiceFacade nav, string editMethodName, T dataContext);
+        //code mort void EditCurrentPage<T>(INavigationServiceFacade nav, string editMethodName, T dataContext);
 
         bool AskConfirmation(string title, string message);
         void DisplayInformation(string title, string message);
 
-        void LaunchCameraCaptureTask();
+        void LaunchCameraCaptureTask<T>(T datacontext, T updatedDataContext, INavigationServiceFacade nav);
     }
 }

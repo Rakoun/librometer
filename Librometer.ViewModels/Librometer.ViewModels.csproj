@@ -57,6 +57,7 @@
     <Compile Include="CategoryViewModel.cs" />
     <Compile Include="AuthorListViewModel.cs" />
     <Compile Include="AuthorViewModel.cs" />
+    <Compile Include="BookListViewModel.cs" />
     <Compile Include="SettingsViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

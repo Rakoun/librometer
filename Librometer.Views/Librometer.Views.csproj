@@ -83,6 +83,12 @@
     <Compile Include="AuthorsPage.xaml.cs">
       <DependentUpon>AuthorsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BooksPage.xaml.cs">
+      <DependentUpon>BooksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListOfBooks.xaml.cs">
+      <DependentUpon>ListOfBooks.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListOfAuthors.xaml.cs">
       <DependentUpon>ListOfAuthors.xaml</DependentUpon>
     </Compile>
@@ -126,6 +132,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AuthorsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BooksPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ListOfBooks.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

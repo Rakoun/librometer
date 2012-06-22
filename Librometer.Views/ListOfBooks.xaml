@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="Librometer.Views.ListOfBooks"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:wpext="clr-namespace:WPExtensions;assembly=WPExtensions"
+    xmlns:panel="clr-namespace:WP7DockPanel;assembly=WP7DockPanel"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:bhv="clr-namespace:Librometer.Views.Behaviors"
+    xmlns:checklstbox="clr-namespace:System.Windows.Controls;assembly=WindowsPhoneListBoxWithCheckBoxesControl"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}" d:DesignHeight="154" d:DesignWidth="423">
+
+    <!--<panel:DockPanel Margin="5">
+        <Grid panel:DockPanel.Dock="Top" Margin="0,0,0,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox />
+            <Button Content="Ok" Grid.Column="1" Margin="2"
+                Command="{Binding LaunchSearchCommand}"/>
+        </Grid>
+        <ListBox Width="Auto" VerticalAlignment="Stretch"
+                 ItemsSource="{Binding Items, Mode=OneWay}"
+                 ItemTemplate="{StaticResource BookmarkInListDataTemplate}"/>
+    </panel:DockPanel>-->
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="0,0,0,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding SearchText, Mode=TwoWay}" Grid.Column="0"/>
+            <Button Content="Ok" Grid.Column="1" Margin="0"
+                Command="{Binding LaunchSearchCommand}"/>
+        </Grid>
+        <!--<ListBox x:Name="MyListBox" Grid.Row="1" Width="Auto" VerticalAlignment="Stretch"
+                 bhv:ListBoxFix.SelectedItemsBinding="True"
+                 bhv:SelectedItemsHelper.SelectedItems="{Binding SelectedItems}"
+                 SelectionMode="Multiple" ItemContainerStyle="{StaticResource ListBoxCheckedStyle}"
+                 ItemsSource="{Binding Items, Mode=OneWay}"
+                 ItemTemplate="{StaticResource CategoryInListDataTemplate}"
+                 >
+        </ListBox>-->
+        <checklstbox:ListBoxWithCheckBoxes x:Name="MyListBox" Grid.Row="1" Width="Auto" VerticalAlignment="Stretch"
+                 bhv:SelectedItemsHelper.SelectedItems="{Binding SelectedItems}"
+                 SelectionMode="Extended"
+                 ItemsSource="{Binding Items, Mode=OneWay}"
+                 ItemTemplate="{StaticResource BookInListDataTemplate}"
+                 IsInChooseState="{Binding IsLstBoxInChooseState}"
+                 >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Tap">
+                    <i:InvokeCommandAction Command="{Binding TapCommand}"
+                                           CommandParameter="{Binding SelectedItem, ElementName=MyListBox, Mode=TwoWay}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </checklstbox:ListBoxWithCheckBoxes>
+        <!--SelectedItem="{Binding CurrentElement}"-->
+        <wpext:AdvancedApplicationBar>
+            <wpext:AdvancedApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnNew" Text="Nouveau"
+                    Command="{Binding OpenAddBookCommand}"
+                    Visibility="{Binding IsBtnNewVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <wpext:AdvancedApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnChoice" Text="Choisir"
+                    Command="{Binding ChoiceBookCommand}"
+                    Visibility="{Binding IsBtnChoiceVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <wpext:AdvancedApplicationBarIconButton IconUri="/Images/appbar_button1.png" x:Name="AppBarIconBtnDelete" Text="Supprimer"
+                    Command="{Binding DeleteBookCommand}"
+                    Visibility="{Binding IsBtnDeleteVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    IsEnabled="{Binding IsBtnDeleteEnabled}"/>
+            <!--<wpext:AdvancedApplicationBarMenuItem Text="Nouveau" x:Name="AppBarMnuItemNew" Command="{Binding OpenAddCategoryCommand}" />
+            <wpext:AdvancedApplicationBarMenuItem Text="Choisir" x:Name="AppBarMnuItemChoice" Command="{Binding ChoiceCategoryCommand}"/>
+            <wpext:AdvancedApplicationBarMenuItem Text="Supprimer" x:Name="AppBarMnuItemDelete" Command="{Binding DeleteCategoryCommand}"/>-->
+        </wpext:AdvancedApplicationBar>
+
+    </Grid>
+</UserControl>

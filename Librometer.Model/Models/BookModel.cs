@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
+using System.Windows.Media.Imaging;
 //using System.ComponentModel.DataAnnotations;non supporté dans WP7
+
 using Librometer.DataAnnotations;
+using Rakouncom.WP.IsolatedStorage;
 
 namespace Librometer.Model
 {
@@ -137,5 +141,22 @@ namespace Librometer.Model
                 RaisePropertyChanged<string>(() => ISBN);
             }
         }
+
+        public BitmapImage ImageSource
+        {
+            get
+            {
+                BitmapImage bi = new BitmapImage();
+
+                using (IsolatedStorageFileStream stream =
+                    IsolatedStorageHelper.ReadBinaryFile(_cover))
+                {
+                    bi.SetSource(stream);
+                    stream.Close();
+                }
+                return bi;
+            }
+        }
+
     }
 }

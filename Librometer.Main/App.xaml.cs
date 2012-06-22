@@ -21,6 +21,8 @@ using IOCAlias = Librometer.Framework.IOC;
 using Librometer.ViewModels;
 using Librometer.Adapters;
 using Rakouncom.WP.IsolatedStorage;
+using System.Windows.Media.Imaging;
+using System.Windows.Resources;
 
 namespace Librometer.Main
 {
@@ -195,6 +197,8 @@ namespace Librometer.Main
             ViewModelLocator.RegisterViewModel<MainViewModel>(
                         new MainViewModel(IOCAlias.ServiceLocator.Instance.Retrieve<INavigationServiceFacade>()));
             ViewModelLocator.RegisterViewModel<BookmarkListViewModel>(new BookmarkListViewModel());
+            ViewModelLocator.RegisterViewModel<BookListViewModel>(
+                        new BookListViewModel(IOCAlias.ServiceLocator.Instance.Retrieve<INavigationServiceFacade>()));
             ViewModelLocator.RegisterViewModel<BookmarkViewModel>(new BookmarkViewModel());
             ViewModelLocator.RegisterViewModel<CategoryListViewModel>(
                         new CategoryListViewModel(IOCAlias.ServiceLocator.Instance.Retrieve<INavigationServiceFacade>()));
@@ -208,6 +212,29 @@ namespace Librometer.Main
         private static void InitializeIsolatedStorage()
         {
             IsolatedStorageHelper.CreateDirectory(@"\Librometer\images\draft");
+
+            #region copie de l'image par défaut dans le répertoire "\Librometer\images\default"
+
+            IsolatedStorageHelper.CreateDirectory(@"\Librometer\images\default");
+
+            // Sauvegarde de l'image dans l'isolated storage
+            Uri uri = new Uri("images/librometer.jpg", UriKind.Relative);
+            StreamResourceInfo resourceInfo = Application.GetResourceStream(uri);
+            BitmapImage imgSource = new BitmapImage();
+            imgSource.SetSource(resourceInfo.Stream);
+            WriteableBitmap writableBitmap = new WriteableBitmap(imgSource);
+
+            string imageFolder = "Librometer/images/default/";//TODO: à mettre dans une ressource
+            string imageFileName = "librometer.jpg";//TODO: à mettre dans une ressource
+
+            using (var stream = IsolatedStorageHelper.CreateFile(imageFolder + imageFileName))
+            {
+                writableBitmap
+                            .SaveJpeg(stream, writableBitmap.PixelWidth,
+                                    writableBitmap.PixelHeight, 0, 100);
+            }
+
+            #endregion
         }
 
         #endregion

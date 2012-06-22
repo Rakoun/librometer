@@ -43,6 +43,24 @@ namespace Librometer.ViewModels
         // Pour Blend
         public BookViewModel() { }
 
+        // Constructeur de copie
+        public BookViewModel(BookViewModel bvm)
+        {
+            this._authors = bvm._authors;
+            this._authorService = bvm._authorService;
+            this._book = bvm.Book;
+            this._categories = bvm._categories;
+            this._categoryService = bvm._categoryService;
+            this._isNewPhoto = bvm._isNewPhoto;
+            this._navigationServiceFacade = bvm._navigationServiceFacade;
+            this._pageTitle = bvm._pageTitle;
+            this._rates = bvm._rates;
+            this._selectedAuthor = bvm._selectedAuthor;
+            this._selectedCategory = bvm._selectedCategory;
+            this._state = bvm._state;
+            this._windowServices = bvm._windowServices;
+        }
+
         private IDialogService _windowServices;
         private IAuthorService _authorService;
         private ICategoryService _categoryService;
@@ -93,7 +111,8 @@ namespace Librometer.ViewModels
         {
             DisplayCameraCommand = new ProxyCommand<BookViewModel>((_)=>
                 {
-                    _windowServices.LaunchCameraCaptureTask();
+                    BookViewModel updatedDataContext = new BookViewModel(this);
+                    _windowServices.LaunchCameraCaptureTask<BookViewModel>(this, updatedDataContext, this._navigationServiceFacade);
                 });
         }
 
@@ -158,7 +177,13 @@ namespace Librometer.ViewModels
         public string PageTitle
         {
             get { return this._pageTitle; }
-            set { this._pageTitle = value; }
+            set
+            {
+                if (this._pageTitle == value) return;
+
+                this._pageTitle = value;
+                RaisePropertyChanged<string>(() => PageTitle);
+            }
         }
 
         #endregion //PageTitle
@@ -227,9 +252,43 @@ namespace Librometer.ViewModels
 
         #endregion // SelectedCategory
 
+        #region IsNewPhoto
+
+        private bool _isNewPhoto;
+        public bool IsNewPhoto
+        {
+            get
+            {
+                //TODO: il y a peut-être mieux
+                if (ParamOne == "NewPhoto")
+                {
+                    _isNewPhoto = true;
+                }
+                else
+                {
+                    _isNewPhoto = false;
+                }
+                return _isNewPhoto;
+            }
+            set
+            {
+                if (_isNewPhoto == value) return;
+
+                _isNewPhoto = value;
+                RaisePropertyChanged<bool>(() => IsNewPhoto);
+            }
+        }
+
+        #endregion // IsNewPhoto
+
         #endregion //Propriétés
 
         public ProxyCommand<BookViewModel> DisplayCameraCommand { get; set; }
+
+        public override string ToString()
+        {
+            return "base";
+        }
 
     }
 }

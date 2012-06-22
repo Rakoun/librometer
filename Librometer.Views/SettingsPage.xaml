@@ -44,6 +44,13 @@
                         </ControlTemplate>
                     </ListBoxItem.Template>
                 </ListBoxItem>
+                <ListBoxItem>
+                    <ListBoxItem.Template>
+                        <ControlTemplate>
+                            <Button Content="{Binding BooksSetting}" Command="{Binding OpenBooksSettingCommand}"/>
+                        </ControlTemplate>
+                    </ListBoxItem.Template>
+                </ListBoxItem>
             </ListBox>
         </Grid>
     </Grid>

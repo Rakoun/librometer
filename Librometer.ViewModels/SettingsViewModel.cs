@@ -49,6 +49,14 @@ namespace Librometer.ViewModels
                             new Uri("/Librometer.Views;component/AuthorsPage.xaml", UriKind.Relative),
                             this._navigationServiceFacade);
             });
+
+            OpenBooksSettingCommand = new ProxyCommand<SettingsViewModel>((_) =>
+            {
+                this._windowServices.OpenNewPage(
+                            new Uri("/Librometer.Views;component/BooksPage.xaml", UriKind.Relative),
+                            this._navigationServiceFacade);
+            });
+
         }
 
         #region Liste des paramètres
@@ -61,6 +69,11 @@ namespace Librometer.ViewModels
         public string AuthorsSetting
         {
             get { return "Auteurs"; }
+        }
+
+        public string BooksSetting
+        {
+            get { return "Livres"; }
         }
 
         #endregion//Liste des paramètres
@@ -83,6 +96,8 @@ namespace Librometer.ViewModels
 
         public ProxyCommand<SettingsViewModel> OpenCategoriesSettingCommand { get; set; }
         public ProxyCommand<SettingsViewModel> OpenAuthorsSettingCommand { get; set; }
+        public ProxyCommand<SettingsViewModel> OpenBooksSettingCommand { get; set; }
+        
     }
 }
  

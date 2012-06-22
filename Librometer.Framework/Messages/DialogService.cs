@@ -84,7 +84,7 @@ namespace Librometer.Framework
         {
             nav.Frame.Navigate(uri);
         }
-
+        /* code mort
         public void EditCurrentPage<T>(INavigationServiceFacade nav, string editMethodName, T dataContext)
         {
             switch (editMethodName)
@@ -98,7 +98,7 @@ namespace Librometer.Framework
                     throw new Exception("Méthode inconnue dans EditCurrentPage");
             }
         }
-
+        */
 
         public bool AskConfirmation(string title, string message)
         {
@@ -111,10 +111,15 @@ namespace Librometer.Framework
             MessageBox.Show(message, title, MessageBoxButton.OK);
         }
 
-        public void LaunchCameraCaptureTask()
+        /// <summary>
+        /// Lance la tâche de prise de photos
+        /// </summary>
+        /// <returns>True si la photo a été sauvegardée, false sinon</returns>
+        public void LaunchCameraCaptureTask<T>(T dataContext, T updatedDataContext, INavigationServiceFacade nav)
         {
             CameraCaptureTask cameraCaptureTask = new CameraCaptureTask();
             cameraCaptureTask.Show();
+            (dataContext as BaseViewModel).ParamOne = "";
 
             cameraCaptureTask.Completed += (s, e) =>
             {
@@ -132,31 +137,33 @@ namespace Librometer.Framework
                     writableBitmap
                                 .SaveJpeg(stream, writableBitmap.PixelWidth,
                                         writableBitmap.PixelHeight, 0, 100);
+                    (dataContext as BaseViewModel).ParamOne = "NewPhoto";
                 }
 
             };
         }
 
         #region Méthodes privées
-
+        /* code mort
         private void EditAppBar<T>(INavigationServiceFacade nav, T dataContext)
         {
-            /*
             Microsoft.Phone.Controls.PhoneApplicationPage page =
                 nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage;
             Microsoft.Phone.Shell.ApplicationBarIconButton btn = 
                         page.ApplicationBar.Buttons[1] as Microsoft.Phone.Shell.ApplicationBarIconButton;
-             * */
+
             
             DeepForestAlias.Shell.ApplicationBar appBar =
                 DeepForestAlias.Shell.PhoneApplicationPage.GetApplicationBar(
                         nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage);
+            (nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage).DataContext = dataContext;
+
             //appBar.Buttons[1].Visibility = Visibility.Collapsed;
             //appBar.Buttons[1].UpdateLayout();
             //Visibility btn2 = appBar.Buttons[2].Visibility;
             //btn = Visibility.Collapsed;
             //(nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage).UpdateLayout();
-            (nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage).DataContext = dataContext;
+            //(nav.Frame.Content as Microsoft.Phone.Controls.PhoneApplicationPage).DataContext = dataContext;
             //BindingExpression bindExp = appBar.Buttons[1].GetBindingExpression(
             //            DeepForestAlias.Shell.ApplicationBarIconButton.VisibilityProperty);
             //Binding bind = bindExp.ParentBinding;
@@ -164,7 +171,7 @@ namespace Librometer.Framework
             //appBar.Buttons[1].UpdateLayout();
 
         }
-
+        */
         #endregion // Méthodes privées
 
     }
